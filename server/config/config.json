@@ -1,0 +1,28 @@
+{
+    "development": {
+        "PORT":8080,
+        "MONGODB_URI": "mongodb+srv://kunal:Kunal%40123@cluster0.6uejp.mongodb.net/careerdna?retryWrites=true&w=majority",
+        "JWT_PRIVATE_KEY":"abc",
+        "SECRET_TOKEN":"secret",
+        "REFRESH_TOKEN":"av",
+        "AWS_ID":"***********",
+        "AWS_SECRET":"*********",
+        "AWS_BUCKET_NAME":"********",
+        "AWS_REGION":"********",
+        "email":"careercode2022@gmail.com",
+        "password":"Career501!"
+    },
+    "production": {
+        "PORT":6000,
+        "MONGODB_URI": "****",
+        "JWT_PRIVATE_KEY":"*******",
+        "SECRET_TOKEN":"secret",
+        "REFRESH_TOKEN":"*********",
+        "AWS_ID":"*********",
+        "AWS_SECRET":"*******",
+        "AWS_BUCKET_NAME":"******",
+        "AWS_REGION":"****",
+        "email":"",
+        "password":""
+    }
+}

@@ -10,13 +10,20 @@ exports.registerValidationResult = (req,res,next) =>{
 }
 
 exports.registerValidator = [
-    check('userName')
+    check('firstName')
     .trim()
     .not()
     .isEmpty()
-    .withMessage('Name is required!')
-    .isLength({ min:3 , max:40 })
-    .withMessage('Name must be 3 to 40 characters long!'),
+    .withMessage('First Name is required!')
+    .isLength({ min:3 , max:20 })
+    .withMessage('First Name must be 3 to 20 characters long!'),
+    check('lastName')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('Last Name is required!')
+    .isLength({ min:3 , max:20 })
+    .withMessage('last Name must be 3 to 20 characters long!'),
     check('userEmail')
     .trim()
     .not()
@@ -33,11 +40,6 @@ exports.registerValidator = [
     .withMessage('Phone Number must be 10 Digit long!')
     .isNumeric()
     .withMessage('Phone Number can be only in digit'),
-    check('userType')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('User type is required!'),
     check('userPassword')
     .trim()
     .not()

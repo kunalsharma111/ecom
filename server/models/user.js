@@ -2,11 +2,18 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-    userName: {
+
+    firstName: {
         type: String,
-        required: [true, 'Name is required'],
-        minlength: [3,'Name must be 3 to 40 characters long'],
-        maxlength: [40,'Name must be 3 to 40 characters long']
+        required: [true, 'First Name is required'],
+        minlength: [3,'First Name must be 3 to 20 characters long'],
+        maxlength: [20,'First Name must be 3 to 20 characters long']
+    },
+    lastName: {
+        type: String,
+        required: [true, 'Last Name is required'],
+        minlength: [3,'Last Name must be 3 to 20 characters long'],
+        maxlength: [20,'Last Name must be 3 to 20 characters long']
     },
     userEmail: {
         type: String,
@@ -25,11 +32,6 @@ const userSchema = new mongoose.Schema({
         minlength: [8,'Password must be 8 Character Long'],
         maxlength: [1024,'Password must be 8 Character Long'],
     },
-    userType: {
-        type: String,
-        enum : ['customer','admin'],
-        required: [true,'User type is required'],
-    },
     userStatus:{
         type: Boolean,
         default:true
@@ -39,7 +41,6 @@ const userSchema = new mongoose.Schema({
     },
     userRole:{
         type : String,
-        default : "customer"
     },
     confirmationStatus: {
         type: String, 
@@ -47,8 +48,7 @@ const userSchema = new mongoose.Schema({
         default: 'Active'
       },
     confirmationCode: { 
-        type: String, 
-        unique: true 
+        type: String,
     },
 },{
     timestamps: true

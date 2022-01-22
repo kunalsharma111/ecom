@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthService } from '../../services/index';
-import { NotificationService } from '../../services/notification.service';
+import { AuthService, NotificationService } from '../../services/index';
 
 @Component({
   selector: 'app-confirm',

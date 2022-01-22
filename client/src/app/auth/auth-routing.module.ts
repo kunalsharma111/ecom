@@ -29,10 +29,10 @@ const routes: Routes = [
     path : 'confirm-forgot-password-otp/:otp',
     component : NewPasswordComponent
   },
-  {
-    path : 'confirm-account/:otp',
-    component : ConfirmComponent
-  },
+  // {
+  //   path : 'confirm-account/:otp',
+  //   component : ConfirmComponent
+  // },
   {
     path : "**",
     redirectTo : 'login'

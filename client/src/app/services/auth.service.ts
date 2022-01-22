@@ -66,6 +66,14 @@ export class AuthService {
               return user;
             }));
     }
+
+    getAllUsers(){
+      return this.http.get<any>(`${environment.apiUrl}/auth/all-users`)
+            .pipe(map(user => {
+              return user;
+            }));
+    }
+
     logout() {
       // remove user from local storage and set current user to null
       localStorage.removeItem('token');

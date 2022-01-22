@@ -13,12 +13,12 @@ module.exports.addNewUser = async (req,res,next) => {
     if (user) {
         return res.status(400).send({message:'That user already exisits!'});
     } else {
-    user = new User(_.pick(req.body, ['userName', 'userEmail','userMobile', 'userPassword','userType','instituteName','userStatus','lastLoginTime']));
+    user = new User(_.pick(req.body, ['firstName', 'lastName','userEmail','userMobile', 'userPassword','userType','userRole','userStatus','lastLoginTime','confirmationCode']));
     await user.save((err)=>{
         if(err){
             res.status(500).send({ message: err });
             return;
         }
-        res.send(_.pick(user, ['userName', 'userEmail','userMobile', 'userPassword','userType','instituteName','userStatus','lastLoginTime']));    });
+        res.send(_.pick(user, ['userName', 'userEmail','userMobile', 'userPassword','userType','userStatus','lastLoginTime']));    });
     }
 }

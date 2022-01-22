@@ -1,7 +1,7 @@
 {
     "development": {
         "PORT":8080,
-        "MONGODB_URI": "mongodb+srv://kunal:Kunal%40123@cluster0.6uejp.mongodb.net/careerdna?retryWrites=true&w=majority",
+        "MONGODB_URI": "mongodb+srv://kunal:Kunal%40123@cluster0.6uejp.mongodb.net/ecom?retryWrites=true&w=majority",
         "JWT_PRIVATE_KEY":"abc",
         "SECRET_TOKEN":"secret",
         "REFRESH_TOKEN":"av",

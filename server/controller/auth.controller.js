@@ -11,17 +11,17 @@ const User = mongoose.model('User');
 module.exports.registerUser = async (req,res,next) => {
     let user = await User.findOne({ userEmail: req.body.userEmail });
     if (user) {
-        return res.status(400).send({message:'That user already exisits!'});
+        return res.status(400).send({message:'User already exisits with this Email Id!'});
     } else {
 
     // Insert the new user if they do not exist yet
-    user = new User(_.pick(req.body, ['userName', 'userEmail','userMobile', 'userPassword','userType','userStatus','lastLoginTime']));
+    user = new User(_.pick(req.body, ['firstName','lastName', 'userEmail','userMobile', 'userPassword','userType','userStatus']));
     await user.save((err)=>{
         if(err){
             res.status(500).send({ message: err });
             return;
         }
-        res.status(200).send({message:'Resitered Successfully'});
+        res.status(200).send({message:'Registered Successfully'});
     });
     }
 }
@@ -95,4 +95,10 @@ module.exports.confirmForgotPassword = async (req, res, next) => {
     user.password = await bcrypt.hash(req.body.userPassword, salt);
     let active = await User.updateOne({confirmationCode : req.params.confirmationCode},{$set:{userPassword : user.password}})
     return res.status(200).send({message:"Password Changed Successfully"});
+}
+
+module.exports.allUsers = async (req, res, next) => {
+    let users = await User.find({});
+    if(!users){ return res.status(400).send({message:"No Users Found"}); }
+    return res.status(200).send({data:users,message:"All Users Fetched Successfully"});
 }

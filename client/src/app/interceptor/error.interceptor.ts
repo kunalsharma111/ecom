@@ -23,11 +23,15 @@ export class ErrorInterceptor implements HttpInterceptor {
       retry(0),
       catchError(err => {
       const errorMessage = this.setError(err);
-        
       if (errorMessage != undefined && errorMessage != null) {
         this.notificationService.showError(errorMessage, '');
       }
-      if([401,403].indexOf(err.status) !== 1){
+      
+      else if(err.status == 422){
+        this.notificationService.showError(err.error.error,'');
+      }
+      else if([401,403].indexOf(err.status) !== 1 && localStorage.getItem('token')!= null && localStorage.getItem('token') != undefined && localStorage.getItem('token') == ""){
+        this.notificationService.showError(err?.error?.error, '');
         this.authService.logout();
       }
       return throwError(errorMessage);

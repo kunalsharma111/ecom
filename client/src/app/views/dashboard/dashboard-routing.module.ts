@@ -4,15 +4,18 @@ import { RoleGuard } from 'src/app/guards/role.guard';
 import { DashboardComponent } from './dashboard.component';
 
 import { Roles } from '../../models/roles';
+import { OrderComponent } from './order/order.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
     path : '',
-    redirectTo : 'dashbaord',
+    redirectTo : 'dash',
     pathMatch :  'full'
   },
   {
-    path: 'dashbaord',
+    path: 'dash',
     component : DashboardComponent,
     // canActivate : [RoleGuard],
     data: {
@@ -21,8 +24,29 @@ const routes: Routes = [
     }
   },
   {
+    path: 'order/:id',
+    component :  OrderComponent,
+    data : {
+      title : 'Order'
+    }
+  },
+  {
+    path: 'profile',
+    component :  ProfileComponent,
+    data : {
+      title : 'Profile'
+    }
+  },
+  {
+    path: 'admin',
+    component :  AdminComponent,
+    data : {
+      title : 'Admin'
+    }
+  },
+  {
     path : "**",
-    redirectTo : ''
+    redirectTo : 'dash'
   }
 ];
 

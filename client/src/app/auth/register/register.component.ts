@@ -36,8 +36,8 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName : ['',[Validators.required,Validators.minLength(3),Validators.maxLength(12)]],
       lastName : [''],
-      userName : [''],
       userEmail : ['',[Validators.required,Validators.email]],
+      userRole : ['customer'],
       userMobile : ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern,Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       userPassword : ['',[Validators.required,Validators.minLength(8),
         Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
@@ -72,13 +72,16 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.spinner.show();
-    this.registerForm.value.userName = this.registerForm.value.firstName;
-    if(this.registerForm.value.lastName != "" && this.registerForm.value.lastName != null || this.registerForm.value.lastName != undefined){
-      this.registerForm.value.userName += " " + this.registerForm.value.lastName;
-    }
-    delete this.registerForm.value.firstName;
-    delete this.registerForm.value.lastName; 
-    delete this.registerForm.value.confirmPassword;
+    //   console.log(this.registerForm.value);
+    //   if(this.registerForm.value.userName != "" && this.registerForm.value.userName != undefined && this.registerForm.value.userName != null){
+    //   this.registerForm.value.userName = this.registerForm.value.firstName;
+    //   if(this.registerForm.value.lastName != "" && this.registerForm.value.lastName != null || this.registerForm.value.lastName != undefined){
+    //     this.registerForm.value.userName += " " + this.registerForm.value.lastName;
+    //   }
+    // }
+    // delete this.registerForm.value.firstName;
+    // delete this.registerForm.value.lastName; 
+    // delete this.registerForm.value.confirmPassword;
     this.authService.register(this.registerForm.value)
             .pipe(first())
             .subscribe(

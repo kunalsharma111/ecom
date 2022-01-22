@@ -7,6 +7,8 @@ const error = require('../middleware/error');
 
 const auth = require('../routes/auth.router');
 const user = require('../routes/user.router');
+const product = require('../routes/product.router');
+const order = require('../routes/order.router');
 
 module.exports = function(app){
     app.use(bodyParser.urlencoded({
@@ -18,5 +20,7 @@ module.exports = function(app){
     app.use(cors());
     app.use('/auth',auth);
     app.use('/user',user);
+    app.use('/product',product);
+    app.use('/order',order);
     app.use(error);
 }

@@ -5,7 +5,7 @@ const { registerValidator,registerValidationResult } = require('../validators/re
 const auth  = require('../middleware/auth');
 const superadminauth = require('../middleware/roleauth');
 
-router.post('/add-user',superadminauth,registerValidator,registerValidationResult,addNewUser);
+router.post('/add-user',registerValidator,registerValidationResult,addNewUser);
 
 
 module.exports = router;

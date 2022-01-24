@@ -15,7 +15,7 @@ module.exports.createOrder = async (req,res,next) => {
             res.status(500).send({ message: err });
             return;
         }
-        res.status(200).send({message:'Order Placed Successfully'});
+        res.status(200).send({data:order,message:'Order Placed Successfully'});
     });
 }
 

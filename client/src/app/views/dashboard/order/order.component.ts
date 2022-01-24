@@ -1,6 +1,7 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
+import swal from 'sweetalert2'; 
 
 import { ProductsService, OrderService, NotificationService, AuthService } from '../../../services/index';
 
@@ -27,6 +28,14 @@ export class OrderComponent implements OnInit {
   confirmOrder(){
     this.orderService.placeOrder(this.data).subscribe((data:any)=>{
       this.notificationService.showSuccess("",data?.message);
+      swal.fire({
+        title: 'Thanks !',
+        text: 'Your Order have Been Confirmed',
+        imageUrl: this.product?.productImage,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Product Image',
+      })      
       this.router.navigate(['/dashboard/']);
     })
   }

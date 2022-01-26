@@ -10,13 +10,17 @@ import { SharedModule } from '../../shared/shared.module';
 import { OrderComponent } from './order/order.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
+import { MyordersComponent } from './myorders/myorders.component';
+import { ThanksorderComponent } from './thanksorder/thanksorder.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     OrderComponent,
     ProfileComponent,
-    AdminComponent
+    AdminComponent,
+    MyordersComponent,
+    ThanksorderComponent
   ],
   imports: [
     CommonModule,

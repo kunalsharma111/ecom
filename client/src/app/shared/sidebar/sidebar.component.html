@@ -1,13 +1,14 @@
 <nav>
-  <label class="logo" routerLink="/dashboard">Ecom</label>
+  <label class="logo" routerLink="/dashboard">R.S.A Ecom</label>
   <input type="checkbox" id="check" />
   <label for="check" class="hamberger-btn">
     <i class="fas fa-bars"></i>
   </label>
   <ul>
-    <li><button class="btn btn-primary" *ngIf="isAdmin" routerLink="/dashboard/admin" >ADMIN</button></li>
+    <li><button class="btn btn-primary" *ngIf="isAdmin"  style="margin-top: -10px;" routerLink="/dashboard/admin" >ADMIN</button></li>
     <!-- <li><i class="fa fa-user-circle-o fa-2x"  aria-hidden="true"></i></li> -->
-    <li><i class="fa fa-shopping-cart fa-2x" routerLink="/dashboard/profile"></i></li>
+    <li><button class="btn btn-primary" style="margin-top: -10px;" routerLink="/dashboard/myorders" >ORDERS</button></li>
+    <li><i class="fa fa-shopping-cart fa-2x" routerLink="/dashboard/cart"></i></li>
     <li><i class="fa fa-sign-out fa-2x" (click)="logout()" aria-hidden="true"></i></li>
   </ul>
 </nav>

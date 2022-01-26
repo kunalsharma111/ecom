@@ -26,6 +26,15 @@ export class OrderService {
             }));
     }
 
+    getOrderDetail(id:any){
+      return this.http.get<any>(`${environment.apiUrl}/order//get-orders-details/${id}`)
+            .pipe(map(user => {
+                return user;
+            }));
+    }
+
+    
+
     getAllOrders(){
       return this.http.get<any>(`${environment.apiUrl}/order/get-all-orders`)
             .pipe(map(user => {

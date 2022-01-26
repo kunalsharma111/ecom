@@ -42,6 +42,9 @@ const userSchema = new mongoose.Schema({
     userRole:{
         type : String,
     },
+    cart:{
+        type: []
+    },
     confirmationStatus: {
         type: String, 
         enum: ['Pending', 'Active'],

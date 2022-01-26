@@ -15,7 +15,7 @@ module.exports.registerUser = async (req,res,next) => {
     } else {
 
     // Insert the new user if they do not exist yet
-    user = new User(_.pick(req.body, ['firstName','lastName', 'userEmail','userMobile', 'userPassword','userType','userStatus']));
+    user = new User(_.pick(req.body, ['firstName','lastName', 'userEmail','userMobile', 'userPassword','userType','userStatus','cart']));
     await user.save((err)=>{
         if(err){
             res.status(500).send({ message: err });

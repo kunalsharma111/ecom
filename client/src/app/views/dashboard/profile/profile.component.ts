@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService,OrderService } from '../../../services/index';
+import { AuthService,OrderService,NotificationService } from '../../../services/index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,17 +11,42 @@ import { AuthService,OrderService } from '../../../services/index';
 export class ProfileComponent implements OnInit {
   userDetails:any;
   myorders : any;
+  cart:any;
+  totalBill:number= 0;
+  shipping = 30;
+  taxes = 5;
+  flag = false;
   constructor(private authService :  AuthService,
-    private orderService : OrderService) { }
+    private router : Router,
+    private notificationService : NotificationService) { }
 
   ngOnInit(): void {
     this.userDetails = this.authService.currentUserValue;
-    this.getMyOrders(this.userDetails._id);
+    this.getMyCart(this.userDetails._id);
   }
-
-  getMyOrders(id:any){
-    this.orderService.getMyOrders(id).subscribe((data:any)=>{
-      this.myorders = data?.data;
+  
+  getMyCart(id:any){
+    this.authService.getMyCart(id).subscribe((data:any)=>{
+      this.cart = data?.products;
+      this.flag = true;
+      if(this.cart?.length <= 0 || this.cart == undefined){
+        this.notificationService.showError("No Product in Your Cart","");
+      }
+      for(let i=0;i<this.cart.length;i++){
+        this.totalBill += this.cart[i].productPrice;
+      }
     })
+  }
+  
+
+
+  removeFromCart(id:any){
+    this.authService.removeFromCart(this.userDetails._id,id).subscribe((data:any)=>{
+      this.flag = false;
+      this.getMyCart(this.userDetails._id);
+    })
+  }
+  order(id:any){
+    this.router.navigate(['/dashboard/order/'+id]);
   }
 }

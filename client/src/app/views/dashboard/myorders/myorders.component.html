@@ -1,0 +1,29 @@
+<app-sidebar></app-sidebar>
+<div class="container table-responsive py-5"> 
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Ordered Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of myorders; index as i">
+          <th scope="row">{{order?._id}}</th>
+          <td><img src="{{order?.productImage}}" class="img-fluid" width="70px"></td>
+          <td>{{order?.productName}}</td>
+          <td>$ {{order?.orderPrice}}</td>
+          <td>{{order?.orderDate | date}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="container">
+      <div class="row">
+        <a routerLink="/dashboard" class="backBtn col-md-6" style="text-align: right;">Go Back to Shop</a>
+        <a routerLink="/dashboard/cart" class="backBtn col-md-6">Go Back to Cart</a>
+      </div>
+    </div>

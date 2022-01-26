@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { ProductsService, NotificationService } from '../../services/index';
+import { ProductsService, NotificationService,AuthService } from '../../services/index';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   subCategories = ["t-shirts","shirts","shoes","mobiles","laptops"];
   genders = ["men","women"];
   constructor(private productService : ProductsService,
+    private authService : AuthService,
     private formBuilder : FormBuilder,
     private notificationService : NotificationService,
     private router : Router) { }
@@ -103,5 +104,15 @@ export class DashboardComponent implements OnInit {
 
   order(id:any){
     this.router.navigate(['/dashboard/order/'+id]);
+  }
+  addToCart(product:any){
+    let user:any = this.authService.currentUserValue;
+    let data = {
+      _id:user._id,
+      product : product
+    }
+    this.authService.addToCart(data).subscribe((data:any)=>{
+     this.notificationService.showSuccess(data?.message,''); 
+    })
   }
 }

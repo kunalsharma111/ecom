@@ -7,6 +7,8 @@ import { Roles } from '../../models/roles';
 import { OrderComponent } from './order/order.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
+import { MyordersComponent } from './myorders/myorders.component';
+import { ThanksorderComponent } from './thanksorder/thanksorder.component';
 
 const routes: Routes = [
   {
@@ -31,10 +33,10 @@ const routes: Routes = [
     }
   },
   {
-    path: 'profile',
+    path: 'cart',
     component :  ProfileComponent,
     data : {
-      title : 'Profile'
+      title : 'Cart'
     }
   },
   {
@@ -42,6 +44,20 @@ const routes: Routes = [
     component :  AdminComponent,
     data : {
       title : 'Admin'
+    }
+  },
+  {
+    path: 'myorders',
+    component :  MyordersComponent,
+    data : {
+      title : 'My Orders'
+    }
+  },
+  {
+    path: 'thanks/:id',
+    component :  ThanksorderComponent,
+    data : {
+      title : 'Thanks'
     }
   },
   {

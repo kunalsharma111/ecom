@@ -28,15 +28,15 @@ export class OrderComponent implements OnInit {
   confirmOrder(){
     this.orderService.placeOrder(this.data).subscribe((data:any)=>{
       this.notificationService.showSuccess("",data?.message);
-      swal.fire({
-        title: 'Thanks !',
-        text: 'Your Order have Been Confirmed',
-        imageUrl: this.product?.productImage,
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: 'Product Image',
-      })      
-      this.router.navigate(['/dashboard/']);
+      // swal.fire({
+      //   title: 'Thanks !',
+      //   text: 'Your Order have Been Confirmed',
+      //   imageUrl: this.product?.productImage,
+      //   imageWidth: 400,
+      //   imageHeight: 200,
+      //   imageAlt: 'Product Image',
+      // })      
+      this.router.navigate(['/dashboard/thanks/'+data?.data?._id]);
     })
   }
 
@@ -53,7 +53,7 @@ export class OrderComponent implements OnInit {
         "productOrderedId":this.product?._id,
         "productName":this.product?.productName,
         "productDescription":this.product?.productDescription,
-        "productImage":this.product?.productImage       
+        "productImage":this.product?.productImage,       
       }
     })
   }

@@ -9,8 +9,8 @@
   <section>
   <div class="top-tab">
   <span>
-  <a href="tel:0000000000"><i class="fa fa-phone"></i> (+0)-000-0000-000</a>
-  <a href="emailto:support@websitename.com"><i class="fa fa-envelope"></i> support@websitename.com</a>
+  <!-- <a href="tel:0000000000"><i class="fa fa-phone"></i> (+0)-000-0000-000</a> -->
+  <a href="emailto:dummywebsite@rahulshettyacademy.com"><i class="fa fa-envelope"></i> dummywebsite@rahulshettyacademy.com</a>
   </span>
   <span>
   <a href="#"><i class="fa fa-facebook"></i></a>
@@ -47,15 +47,19 @@
   <!--BANNER-->
   <div class="banner">
   <section>
-  <h3>Welcome To <em>Ecom</em> Website</h3>
+    <h3>Practice Website for <em>Rahul Shetty Academy</em> Students</h3>
   <h1 class="title">We Make Your Shopping Simple</h1>
-  <a routerLink="/auth/register" class="btn1">Resiter</a>
-   <a class="btn2">Contact Us</a>
+  <a routerLink="/auth/register" class="btn1">Register</a>
+   <!-- <a class="btn2">Contact Us</a> -->
   </section>
   <section>
         <div class="login-section-wrapper" style="background-color: white;">
           <div class="brand-wrapper">
           </div>
+
+          <p class="demo">Demo Account to play , <label class="darkit">Email:customer@gmail.com &nbsp; Password : Admin@123</label> or<br>
+            Register to play with your account
+          </p>
           <div class="login-wrapper my-auto p-5">
             <h1 class="login-title">Log in</h1>
             <form [formGroup]="loginForm" (ngSubmit)="login()">
@@ -80,7 +84,7 @@
               <input name="login" id="login"  class="btn btn-block login-btn" type="submit" value="Login">
             </form>
             <a class="forgot-password-link" [routerLink]="['/auth/forgot-password']">Forgot password?</a>
-            <p class="login-wrapper-footer-text">Don't have an account? <a [routerLink]="['/auth/register']" class="text-reset">Register here</a></p>
+            <p [routerLink]="['/auth/register']" class="login-wrapper-footer-text" style="cursor: pointer;">Don't have an account? <a  class="text-reset">Register here</a></p>
           </div>
         </div>
   <!-- <div class="form">
@@ -137,7 +141,7 @@
   <h1 class="title">Why People Choose Us?</h1>
   </section>
   <section>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
   </section>
   </div>
   <section>

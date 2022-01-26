@@ -1,156 +1,78 @@
 <app-sidebar></app-sidebar>
-  <div class="container mt-3 mt-md-5">
-    <h2 class="text-charcoal hidden-sm-down">Your Orders</h2>
-    <h5 class="text-charcoal hidden-md-up">Your Orders</h5>
-    <div class="row">
-      <div class="col-12">
-        <div class="list-group mb-5">
-          <div class="list-group-item p-3 bg-snow" style="position: relative;">
-            <div class="row w-100 no-gutters">
-              <div class="col-6 col-md">
-                <h6 class="text-charcoal mb-0 w-100">Email</h6>
-                <a href="" class="text-pebble mb-0 w-100 mb-2 mb-md-0">{{userDetails?.userEmail}}</a>
-              </div>
-              <div class="col-6 col-md">
-                <h6 class="text-charcoal mb-0 w-100">Mobile</h6>
-                <p class="text-pebble mb-0 w-100 mb-2 mb-md-0">{{userDetails?.userMobile}}</p>  
-              </div>
-              <!-- <div class="col-6 col-md"> 
-                <h6 class="text-charcoal mb-0 w-100">Total Money Spent</h6>
-                <p class="text-pebble mb-0 w-100 mb-2 mb-md-0">{{}}</p> 
-              </div> -->
-              <!-- <div class="col-6 col-md"> 
-                <h6 class="text-charcoal mb-0 w-100">Shipped To</h6>
-                <p class="text-pebble mb-0 w-100 mb-2 mb-md-0">Late M. Night</p> 
-              </div>
-              <div class="col-12 col-md-3">
-                <a href="" class="btn btn-primary w-100">View Order</a>
-              </div> -->
-            </div>
-            
+<div class="wrap cf">
+  <!-- <h1 class="projTitle">Responsive Table<span>-Less</span> Shopping Cart</h1> -->
+  <div class="heading cf">
+    <h1>My Cart</h1>
+    <a routerLink="/dashboard" class="continue">Continue Shopping</a>
+  </div>
+  <div *ngIf="!cart && flag" style="text-align: center; margin-top: 15vh;">
+    <h1 style="color: lightgray;">No Products in Your Cart !</h1>
+  </div>
+  <div class="cart">
+<!--    <ul class="tableHead">
+      <li class="prodHeader">Product</li>
+      <li>Quantity</li>
+      <li>Total</li>
+       <li>Remove</li>
+    </ul>-->
+    <ul class="cartWrap" *ngFor="let c of cart;let i=index;">
+      <li *ngIf="i % 2 == 0" class="items even" (click)="order(c?._id)">
+        <div class="infoWrap"> 
+          <div class="cartSection">
+            <img src={{c?.productImage}} alt="" class="itemImg" />
+            <p class="itemNumber">#{{c?._id}}</p>
+            <h3>{{c?.productName}}</h3>
+            <p> MRP $ {{c?.productPrice}}</p>
+        
+            <p class="stockStatus"> In Stock</p>
           </div>
-          <div class="list-group-item p-3 bg-white">
-            <div class="row no-gutters">
-              <div class="col-12 col-md-9 pr-0 pr-md-3">
-                <div class="alert p-2 alert-success w-100 mb-0">
-                  <h6 class="text-green mb-0"><b>Shipped</b></h6>
-                  <!-- <p class="text-green hidden-sm-down mb-0">Est. delivery between Aug 5 – Aug 9th, 2017</p> -->
-                </div>
-              </div>
-              <div class="col-12 col-md-3">
-                <a href="" class="btn btn-secondary w-100 mb-2">Track Shipment</a>
-              </div>
-              <div class="row no-gutters mt-3" *ngFor="let order of myorders">
-                <div class="col-3 col-md-1">
-                  <img class="img-fluid pr-3" src="{{order?.productImage}}" alt="">
-                </div>
-                <div class="col-9 col-md-8 pr-0 pr-md-3">
-                  <h6 class="text-charcoal mb-2 mb-md-1">
-                    <a href="" class="text-charcoal">{{order?.productName}}</a>
-                  </h6>
-                  <ul class="list-unstyled text-pebble mb-2 small">
-                    <li class="">
-                      <!-- <b>Color:</b> Red -->
-                      {{order?.productDescription}}
-                    </li>
-                    <!-- <li class="">
-                      <b>Size:</b> L
-                    </li> -->
-                  </ul>
-                  <h6 class="text-charcoal text-left mb-0 mb-md-2"><b>$ {{order?.orderPrice}}</b></h6>
-                </div>
-                <div class="col-12 col-md-3 hidden-sm-down">
-                  <a href="" class="btn btn-secondary w-100 mb-2">Buy It Again</a>
-                  <a href="" class="btn btn-secondary w-100">Request a Return</a>
-                </div>
-              </div>
-            </div>
+          <div class="prodTotal cartSection">
+            <p>$ {{c?.productPrice}}</p>
+          </div>
+          <div class="cartSection removeWrap">
+            <button class="btn btn-primary" style="margin-top: -20px;" (click)="order(c?._id)">Buy Now</button>  &nbsp;
+            <button class="btn btn-danger" style="margin-top: -20px;" (click)="removeFromCart(c._id)"><i class="fa fa-trash-o"  aria-hidden="true"></i></button>
           </div>
         </div>
-      </div>
+      </li>
+      <li *ngIf="i % 2 != 0" class="items odd" (click)="order(c?._id)">
+        <div class="infoWrap"> 
+          <div class="cartSection">
+            <img src={{c?.productImage}} alt="" class="itemImg" />
+            <p class="itemNumber">#{{c?._id}}</p>
+            <h3>{{c?.productName}}</h3>
+            <p> MRP $ {{c?.productPrice}}</p>
+        
+            <p class="stockStatus"> In Stock</p>
+          </div>
+          <div class="prodTotal cartSection">
+            <p>$ {{c?.productPrice}}</p>
+          </div>
+          <div class="cartSection removeWrap">
+            <button class="btn btn-primary" style="margin-top: -20px;" (click)="order(c?._id)">Buy Now</button>  &nbsp;
+            <button class="btn btn-danger" style="margin-top: -20px;" (click)="removeFromCart(c._id)"><i class="fa fa-trash-o"  aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </li>
       
-  <!--     <div class="col-12 col-md-4">
-        <div class="pt-5 pt-md-0">
-          <div class="list-group mb-3">
-            <div class="list-group-item p-3 bg-snow">
-              <h6 class="mb-0">Order Summary</h6>
-            </div>
-            <div class="list-group-item py-2 px-3 bg-white">
-              <div class="row w-100 no-gutters">
-                <div class="col-6 text-pebble">
-                  Subtotal
-                </div>
-                <div class="col-6 text-right text-charcoal">
-                  $54.97
-                </div>
-              </div>
-            </div>
-            <div class="list-group-item py-2 px-3 bg-white">
-              <div class="row w-100 no-gutters">
-                <div class="col-6 text-pebble">
-                  Sales Tax
-                </div>
-                <div class="col-6 text-right text-charcoal">
-                  $4.30
-                </div>
-              </div>
-            </div>
-            <div class="list-group-item py-2 px-3 bg-white">
-              <div class="row w-100 no-gutters">
-                <div class="col-6 text-pebble">
-                  Shipping
-                </div>
-                <div class="col-6 text-right text-charcoal">
-                  FREE
-                </div>
-              </div>
-            </div>
-            <div class="list-group-item py-2 px-3 bg-white">
-              <div class="row w-100 no-gutters">
-                <div class="col-8 text-pebble">
-                  Gift certificate
-                </div>
-                <div class="col-4 text-right text-red text-charcoal">
-                  -$5.55
-                </div>
-              </div>
-            </div>
-            <div class="list-group-item py-2 px-3 bg-snow">
-              <div class="row w-100 no-gutters">
-                <div class="col-8 text-charcoal">
-                  <b>Total</b>
-                </div>
-                <div class="col-4 text-right text-green">
-                  <b>$53.65</b>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-    </div>
+      
+      <!--<li class="items even">Item 2</li>-->
+ 
+    </ul>
   </div>
   
-  <!-- <div class="p-3 hidden-md-up"></div>
-  <div class="mobile-nav hidden-md-up">
-    <a href="">
-      <i class="fa fa-home"></i>
-      Deals
-    </a>
-    <a class="" href="">
-      <i class="fa fa-th-large"></i>
-      Categories
-    </a>
-    <a href="">
-      <i class="fa fa-search"></i>
-      Search
-    </a>
-    <a href="" class="active">
-      <i class="fa fa-shopping-cart"></i>
-      Cart
-    </a>
-    <a class="" href="">
-      <i class="fa fa-user"></i>
-      Account
-    </a>
-  </div> -->
+  <!-- <div *ngIf="cart" class="promoCode"><label for="promo">Have A Promo Code?</label><input type="text" name="promo" placholder="Enter Code" />
+  <a *ngIf="cart" href="#" class="btn"></a></div> -->
+  
+  <div class="subtotal cf" *ngIf="cart">
+    <!-- <ul>
+      <li class="totalRow"><span class="label">Subtotal</span><span class="value">${{totalBill}}</span></li>
+      
+          <li class="totalRow"><span class="label">Shipping</span><span class="value">${{shipping}}</span></li>
+      
+            <li class="totalRow"><span class="label">Tax</span><span class="value">${{taxes}}</span></li>
+            <li class="totalRow final"><span class="label">Total</span><span class="value">${{totalBill + shipping + taxes}}</span></li>
+      <li class="totalRow"><a href="#" class="btn continue">Checkout</a></li>
+    </ul> -->
+  </div>
+</div>

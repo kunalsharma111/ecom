@@ -11,6 +11,7 @@
           <img class="iphone" src="{{product?.productImage}}" alt="">
         </div>
         <div class="item__details">
+          #{{product?._id}}
           <div class="item__title">
             {{product?.productName}}
           </div>
@@ -33,7 +34,7 @@
     </div>
     <div class="discount"></div>
 
-    <div class="container">
+    <!-- <div class="container">
       <div class="payment">
         <div class="payment__title">
           Payment Method
@@ -147,7 +148,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="container">
       <div class="actions">
 
@@ -155,7 +156,7 @@
           <i class="icon icon-arrow-right-circle"></i>
         </a>
         <a routerLink="/dashboard" class="backBtn">Go Back to Shop</a>
-
+        <a routerLink="/dashboard/cart" class="backBtn">Go Back to Cart</a>
       </div>
       </div>
   </section>

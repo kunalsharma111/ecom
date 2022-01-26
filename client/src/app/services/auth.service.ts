@@ -74,6 +74,27 @@ export class AuthService {
             }));
     }
 
+    addToCart(data:any){
+      return this.http.post<any>(`${environment.apiUrl}/user/add-to-cart`,data)
+            .pipe(map(user => {
+              return user;
+            }));
+    }
+
+    getMyCart(id:any){
+      return this.http.get<any>(`${environment.apiUrl}/user/get-cart-products/${id}`)
+            .pipe(map(user => {
+                return user;
+            }));
+    }
+
+    removeFromCart(userid:any,id:any){
+      return this.http.delete<any>(`${environment.apiUrl}/user/remove-from-cart/${userid}/${id}`)
+            .pipe(map(user => {
+                return user;
+            }));
+    }
+
     logout() {
       // remove user from local storage and set current user to null
       localStorage.removeItem('token');

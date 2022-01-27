@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
       if(this.cart?.length <= 0 || this.cart == undefined){
         this.notificationService.showError("No Product in Your Cart","");
       }
-      for(let i=0;i<this.cart.length;i++){
+      for(let i=0;i<this.cart?.length;i++){
         this.totalBill += this.cart[i].productPrice;
       }
     })
@@ -44,9 +44,29 @@ export class ProfileComponent implements OnInit {
     this.authService.removeFromCart(this.userDetails._id,id).subscribe((data:any)=>{
       this.flag = false;
       this.getMyCart(this.userDetails._id);
+      this.authService.changeCart(true);
     })
   }
+  
   order(id:any){
-    this.router.navigate(['/dashboard/order/'+id]);
+    let temp = [];
+    temp.push(id);
+    this.router.navigate(['/dashboard/order/'],{
+      queryParams: {
+        prop: JSON.stringify(temp)
+      }
+    });
+  }
+  buyAll(){
+    let temp = [];
+    for(let i=0;i<this.cart.length;i++){
+      temp.push(this.cart[i]._id);
+    }
+    this.router.navigate(['/dashboard/order/'],{
+      queryParams: {
+        prop: JSON.stringify(temp)
+      }
+    });
+    
   }
 }

@@ -232,7 +232,7 @@ input[type="text"] {
   margin-right: 10px;
 }
 
-.btn {
+.btnn {
   font-family: "Josefin Sans", sans-serif;
   border-radius: 8px;
   border: 0;
@@ -247,16 +247,16 @@ input[type="text"] {
   transition: all 0.15s ease;
   text-decoration: none;
 }
-.btn .icon {
+.btnn .icon {
   margin-left: 10px;
   font-size: 20px;
 }
-.btn:hover {
+.btnn:hover {
   -webkit-transform: translateY(-1px);
           transform: translateY(-1px);
   background: #4984ea;
 }
-.btn.action__back {
+.btnn.action__back {
   background: transparent;
   color: #a0a0a0;
 }

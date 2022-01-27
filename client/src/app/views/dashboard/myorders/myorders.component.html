@@ -1,9 +1,10 @@
 <app-sidebar></app-sidebar>
 <div class="container table-responsive py-5"> 
+  <h1>Your Orders</h1>
     <table class="table table-bordered table-hover">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">Order Id</th>
           <th scope="col">Product Image</th>
           <th scope="col">Name</th>
           <th scope="col">Price</th>
@@ -20,10 +21,11 @@
         </tr>
       </tbody>
     </table>
+    * If orders Will be more than 25 your last order will get deleted
     </div>
     <div class="container">
       <div class="row">
-        <a routerLink="/dashboard" class="backBtn col-md-6" style="text-align: right;">Go Back to Shop</a>
-        <a routerLink="/dashboard/cart" class="backBtn col-md-6">Go Back to Cart</a>
+        <button routerLink="/dashboard" class="btn btn-primary col-md-2 offset-md-4">Go Back to Shop</button>&nbsp;
+        <button routerLink="/dashboard/cart" class="btn btn-primary col-md-2">Go Back to Cart</button>
       </div>
     </div>

@@ -18,6 +18,9 @@ export class AuthService {
   helper = new JwtHelperService();
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
+
+  private cartUpdateSource = new BehaviorSubject('true');
+  currentCart = this.cartUpdateSource.asObservable();
   
   constructor(private http: HttpClient,
     private router: Router,private notificationService : NotificationService) {
@@ -34,6 +37,13 @@ export class AuthService {
       return this.currentUserSubject.value;
     }
 
+    // public get currentCartValue(){
+    //   return this.cartUpdateSource.value;
+    // }
+    changeCart(change : any) {
+      this.cartUpdateSource.next(change);
+    }
+
     login(data:any){
       return this.http.post<any>(`${environment.apiUrl}/auth/login`,data)
             .pipe(map(user => {
@@ -44,6 +54,14 @@ export class AuthService {
                 return user;
             }));
     }
+
+    getCartCount(id:any){
+      return this.http.get<any>(`${environment.apiUrl}/user/get-cart-count/${id}`)
+            .pipe(map(user => {
+                return user;
+            }));
+    }
+
     register(data:any){
       return this.http.post<any>(`${environment.apiUrl}/auth/register`,data)
             .pipe(map(user => {

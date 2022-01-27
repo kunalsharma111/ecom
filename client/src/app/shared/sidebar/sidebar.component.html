@@ -1,5 +1,5 @@
 <nav>
-  <label class="logo" routerLink="/dashboard">R.S.A Ecom</label>
+  <label class="logo" routerLink="/dashboard">Automation Practice</label>
   <input type="checkbox" id="check" />
   <label for="check" class="hamberger-btn">
     <i class="fas fa-bars"></i>
@@ -8,7 +8,15 @@
     <li><button class="btn btn-primary" *ngIf="isAdmin"  style="margin-top: -10px;" routerLink="/dashboard/admin" >ADMIN</button></li>
     <!-- <li><i class="fa fa-user-circle-o fa-2x"  aria-hidden="true"></i></li> -->
     <li><button class="btn btn-primary" style="margin-top: -10px;" routerLink="/dashboard/myorders" >ORDERS</button></li>
-    <li><i class="fa fa-shopping-cart fa-2x" routerLink="/dashboard/cart"></i></li>
-    <li><i class="fa fa-sign-out fa-2x" (click)="logout()" aria-hidden="true"></i></li>
+    <li>
+      <button class="btn btn-primary" style="margin-top: -10px;" routerLink="/dashboard/cart" >
+        <i class="fa fa-shopping-cart"></i> Cart <label style="background-color: red; border-radius: 2px; color: white; padding-left: 7px; padding-right: 7px;">{{cartCount}}</label>
+      </button>
+    </li>
+    <li>
+      <button class="btn btn-primary" style="margin-top: -10px;" (click)="logout()" >
+        <i class="fa fa-sign-out"  aria-hidden="true"></i> Sign Out
+      </button>
+      </li>
   </ul>
 </nav>

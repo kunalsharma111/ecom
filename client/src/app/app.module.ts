@@ -20,7 +20,7 @@ import { JwtInterceptor } from './interceptor/jwt.interceptor';
     HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 1000,
-      positionClass: 'toast-top-right'
+      positionClass: 'toast-bottom-right'
     }),
   ],
   providers: [

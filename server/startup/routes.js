@@ -11,11 +11,11 @@ const product = require('../routes/product.router');
 const order = require('../routes/order.router');
 
 module.exports = function(app){
-    app.use(bodyParser.urlencoded({
-        extended:true,
-        limit:'25mb',
-        parameterLimit:50000
-    }));
+    // app.use(bodyParser.urlencoded({
+    //     extended:true,
+    //     limit:'25mb',
+    //     parameterLimit:50000
+    // }));
     app.use(bodyParser.json({limit: '25mb'}));
     app.use(cors());
     app.use('/auth',auth);

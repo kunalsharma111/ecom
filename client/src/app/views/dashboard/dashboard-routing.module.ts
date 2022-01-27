@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { ThanksorderComponent } from './thanksorder/thanksorder.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'order/:id',
+    path: 'order',
     component :  OrderComponent,
     data : {
       title : 'Order'
@@ -54,10 +55,17 @@ const routes: Routes = [
     }
   },
   {
-    path: 'thanks/:id',
+    path: 'thanks',
     component :  ThanksorderComponent,
     data : {
       title : 'Thanks'
+    }
+  },
+  {
+    path: 'product-details/:id',
+    component :  ProductDetailsComponent,
+    data : {
+      title : 'Product Details'
     }
   },
   {

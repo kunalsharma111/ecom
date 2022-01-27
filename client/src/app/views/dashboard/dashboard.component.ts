@@ -113,6 +113,7 @@ export class DashboardComponent implements OnInit {
     }
     this.authService.addToCart(data).subscribe((data:any)=>{
      this.notificationService.showSuccess(data?.message,''); 
+     this.authService.changeCart(true);
     })
   }
 }

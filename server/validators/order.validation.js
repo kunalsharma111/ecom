@@ -10,26 +10,10 @@ exports.orderValidationResult = (req,res,next) =>{
 }
 
 exports.orderValidator = [
-    check('orderById')
+    check('orders')
     .trim()
     .not()
     .isEmpty()
-    .withMessage('Order By Id is required!'),
-    check('orderBy')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('Order By is required!'),
-    check('orderDate')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('Order Date is required!'),
-    check('orderPrice')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('Order Price is required!')
-    
+    .withMessage('Minimum One Order is required!')
     
 ]

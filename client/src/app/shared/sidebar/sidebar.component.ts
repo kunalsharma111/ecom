@@ -10,14 +10,22 @@ export class SidebarComponent implements OnInit {
   @Input() isExpanded: boolean = false;
   @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
   isAdmin : Boolean = false;
+  cartCount:any;
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
   constructor(private authService : AuthService) { }
 
   ngOnInit(): void {
-    if(this.authService.currentUserValue.userRole == "admin"){
+    let details : any = this.authService.currentUserValue;
+    this.getCartCount(details._id);  
+    if(details.userRole == "admin"){
       this.isAdmin = true;
     }
+    this.authService.currentCart.subscribe((data:any)=>{
+      this.getCartCount(details._id); 
+      
+    })
   }
+
   logout(){
     this.authService.logout();
   }
@@ -28,5 +36,11 @@ export class SidebarComponent implements OnInit {
     }else{
       this.navbarClass = "topnav";
     }
+  }
+
+  getCartCount(id:any){
+    this.authService.getCartCount(id).subscribe((data:any)=>{
+      this.cartCount = data.count;
+    })
   }
 }

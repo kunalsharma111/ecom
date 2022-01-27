@@ -16,7 +16,7 @@
        <li>Remove</li>
     </ul>-->
     <ul class="cartWrap" *ngFor="let c of cart;let i=index;">
-      <li *ngIf="i % 2 == 0" class="items even" (click)="order(c?._id)">
+      <li *ngIf="i % 2 == 0" class="items even">
         <div class="infoWrap"> 
           <div class="cartSection">
             <img src={{c?.productImage}} alt="" class="itemImg" />
@@ -35,7 +35,7 @@
           </div>
         </div>
       </li>
-      <li *ngIf="i % 2 != 0" class="items odd" (click)="order(c?._id)">
+      <li *ngIf="i % 2 != 0" class="items odd" >
         <div class="infoWrap"> 
           <div class="cartSection">
             <img src={{c?.productImage}} alt="" class="itemImg" />
@@ -65,14 +65,14 @@
   <a *ngIf="cart" href="#" class="btn"></a></div> -->
   
   <div class="subtotal cf" *ngIf="cart">
-    <!-- <ul>
+    <ul>
       <li class="totalRow"><span class="label">Subtotal</span><span class="value">${{totalBill}}</span></li>
       
-          <li class="totalRow"><span class="label">Shipping</span><span class="value">${{shipping}}</span></li>
+          <!-- <li class="totalRow"><span class="label">Shipping</span><span class="value">${{shipping}}</span></li>
       
-            <li class="totalRow"><span class="label">Tax</span><span class="value">${{taxes}}</span></li>
-            <li class="totalRow final"><span class="label">Total</span><span class="value">${{totalBill + shipping + taxes}}</span></li>
-      <li class="totalRow"><a href="#" class="btn continue">Checkout</a></li>
-    </ul> -->
+            <li class="totalRow"><span class="label">Tax</span><span class="value">${{taxes}}</span></li> -->
+            <li class="totalRow final"><span class="label">Total</span><span class="value">${{totalBill}}</span></li>
+      <li class="totalRow"><a style="background-color: lightgreen;" class="btn continue" (click)="buyAll()" >Buy All</a></li>
+    </ul>
   </div>
 </div>

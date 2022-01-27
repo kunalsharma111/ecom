@@ -4,30 +4,32 @@
     <div class="container">
 
     </div>
-    <div class="details shadow" style="margin-top: 10vh;">
+    <div class="details shadow" style="margin-top: 10vh;" *ngFor="let product of orders.orders">
       <div class="details__item">
 
         <div class="item__image">
           <img class="iphone" src="{{product?.productImage}}" alt="">
         </div>
         <div class="item__details">
-          #{{product?._id}}
           <div class="item__title">
             {{product?.productName}}
           </div>
           <div class="item__price">
-            $ {{product?.productPrice}}
+            $ {{product?.orderPrice}}
           </div>
           <div class="item__quantity">
             Quantity: 1
           </div>
+          <div class="item__quantity">
+            Quantity: 1
+          </div>
+          
           <div class="item__description">
             <ul style="">
               <li>{{product?.productDescription}}</li>
             </ul>
 
           </div>
-
         </div>
       </div>
 
@@ -151,12 +153,15 @@
     </div> -->
     <div class="container">
       <div class="actions">
-
-        <a class="btn action__submit" (click)="confirmOrder()">Place your Order
+        <a class="btnn action__submit" *ngIf="orders.orders.length > 1" (click)="confirmOrder()">Place All Order
           <i class="icon icon-arrow-right-circle"></i>
         </a>
-        <a routerLink="/dashboard" class="backBtn">Go Back to Shop</a>
-        <a routerLink="/dashboard/cart" class="backBtn">Go Back to Cart</a>
+
+        <a class="btnn action__submit" *ngIf="orders.orders.length == 1" (click)="confirmOrder()">Place Order
+          <i class="icon icon-arrow-right-circle"></i>
+        </a>
+        <button routerLink="/dashboard" class="btn btn-primary mt-5">Go Back to Shop</button>&nbsp;
+        <button routerLink="/dashboard/cart" class="btn btn-primary">Go Back to Cart</button>
       </div>
       </div>
   </section>

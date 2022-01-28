@@ -18,8 +18,6 @@ export class ThanksorderComponent implements OnInit {
     this.allOrders = [];
     this.activateRoute.queryParams.subscribe(params => {
       this.orderDetailss = JSON.parse(params.prop);
-      console.log(this.orderDetailss);
-      
     })
     this.getAllProducts(this.orderDetailss);
   }

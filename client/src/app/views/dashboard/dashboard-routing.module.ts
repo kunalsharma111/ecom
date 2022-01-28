@@ -10,6 +10,7 @@ import { AdminComponent } from './admin/admin.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { ThanksorderComponent } from './thanksorder/thanksorder.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,13 @@ const routes: Routes = [
     component :  ProductDetailsComponent,
     data : {
       title : 'Product Details'
+    }
+  },
+  {
+    path: 'order-details/:id',
+    component :  OrderDetailsComponent,
+    data : {
+      title : 'Order Details'
     }
   },
   {

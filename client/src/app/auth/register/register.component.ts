@@ -72,16 +72,6 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.spinner.show();
-    //   console.log(this.registerForm.value);
-    //   if(this.registerForm.value.userName != "" && this.registerForm.value.userName != undefined && this.registerForm.value.userName != null){
-    //   this.registerForm.value.userName = this.registerForm.value.firstName;
-    //   if(this.registerForm.value.lastName != "" && this.registerForm.value.lastName != null || this.registerForm.value.lastName != undefined){
-    //     this.registerForm.value.userName += " " + this.registerForm.value.lastName;
-    //   }
-    // }
-    // delete this.registerForm.value.firstName;
-    // delete this.registerForm.value.lastName; 
-    // delete this.registerForm.value.confirmPassword;
     this.authService.register(this.registerForm.value)
             .pipe(first())
             .subscribe(

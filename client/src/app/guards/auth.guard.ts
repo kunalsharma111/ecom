@@ -19,8 +19,6 @@ export class AuthGuard implements CanActivate{
     // token = JSON.parse(token);
     const decodedToken = this.helper.decodeToken(token);
     let validity = this.helper.isTokenExpired(token);
-    console.log();
-    
     if (token != null && validity == false) {
       return true;
     }

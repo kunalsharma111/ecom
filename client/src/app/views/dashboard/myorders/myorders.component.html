@@ -9,6 +9,8 @@
           <th scope="col">Name</th>
           <th scope="col">Price</th>
           <th scope="col">Ordered Date</th>
+          <th scope="col">View</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +20,8 @@
           <td>{{order?.productName}}</td>
           <td>$ {{order?.orderPrice}}</td>
           <td>{{order?.orderDate | date}}</td>
+          <td><button class="btn btn-primary" routerLink="/dashboard/order-details/{{order?._id}}">View</button></td>
+          <td><button class="btn btn-danger" (click)="delete(order?._id)">Delete</button></td>
         </tr>
       </tbody>
     </table>

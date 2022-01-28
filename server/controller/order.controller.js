@@ -13,7 +13,6 @@ const User = mongoose.model('User');
 module.exports.createOrder = async (req,res,next) => {
     let orderIds = [];
     let or = await Order.find({orderById:req.body.orderById}).sort({"createdAt": -1});
-    console.log(or.length);
     if(or.length >= 25){
         for(let i=0;i<req.body.orders.length;i++){
             let del = await Order.deleteOne({_id:or[or.length-1]._id});
@@ -74,3 +73,12 @@ module.exports.getOrderDetails = async (req,res,next) => {
     }
     res.status(200).send({data:order,message:'Orders fetched for customer Successfully'});
 }
+
+module.exports.deleteOrder = async (req,res,next) => {
+    let order = await Order.deleteOne({_id: req.params.id});
+    if(!order){
+        return res.status(400).send({message:'Order not found'});
+    }
+    res.status(200).send({message:'Orders Deleted Successfully'});
+}
+

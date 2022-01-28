@@ -27,7 +27,6 @@ module.exports.addToCart = async (req,res,next) => {
     User.updateOne({ _id: req.body._id }, { "$push": { "cart":  req.body.product  }}, { safe: true, multi:false }, function(err, obj) {
         res.status(200).send({message:"Product Added To Cart"})
     },err=>{
-        console.log(err);
         return res.status(400).send({message:'Not Able to Add'});
     });
 }

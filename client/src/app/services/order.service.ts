@@ -41,4 +41,11 @@ export class OrderService {
                 return user;
             }));
     }
+
+    deleteOrder(id:any){
+      return this.http.delete<any>(`${environment.apiUrl}/order/delete-order/${id}`)
+            .pipe(map(user => {
+                return user;
+            }));
+    }
 }

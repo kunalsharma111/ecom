@@ -16,6 +16,7 @@ export class OrderComponent implements OnInit {
   userDetails:any;
   orders:any;
   listOfProducts : any;
+  date:any;
   constructor(private activateRoute : ActivatedRoute,
     private productService : ProductsService,
     private orderService : OrderService,
@@ -24,7 +25,7 @@ export class OrderComponent implements OnInit {
     private router : Router) { }
 
   ngOnInit(): void {
-
+    this.date = new Date();
     this.userDetails = this.authService.currentUserValue;
     this.activateRoute.queryParams.subscribe(params => {
       this.listOfProducts = JSON.parse(params.prop);
@@ -40,8 +41,6 @@ export class OrderComponent implements OnInit {
     for(let i=0;i<list.length;i++){
     this.getProductDetails(list[i]);
     }
-    console.log(this.orders);
-    
   }
 
   confirmOrder(){

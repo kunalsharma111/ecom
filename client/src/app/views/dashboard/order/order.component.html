@@ -36,7 +36,7 @@
     </div>
     <div class="discount"></div>
 
-    <!-- <div class="container">
+    <div class="container">
       <div class="payment">
         <div class="payment__title">
           Payment Method
@@ -141,16 +141,16 @@
               <i class="icon icon-plane"></i> Shiping Information
             </div>
             <div class="details__user">
-              <div class="user__name">John Doe
-                <br> 13/03/1980</div>
-              <div class="user__address">Shipping Address: 22 Street, Address
+              <div class="user__name">{{userDetails?.userEmail}}
+                <br> {{date | date}}</div>
+              <div class="user__address">Shipping Address: 
                 <br>Country</div>
             </div>
 
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="container">
       <div class="actions">
         <a class="btnn action__submit" *ngIf="orders.orders.length > 1" (click)="confirmOrder()">Place All Order

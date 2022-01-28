@@ -4,6 +4,5 @@ mongoose.connect(process.env.MONGODB_URI , {useNewUrlParser: true, useUnifiedTop
     (err) => {
         if(!err) { console.log('Mongo DB Connected Succeeded'); }
         else{
-            console.log(err);
              console.log('Error in MongoDB Connection : ' + JSON.stringify(err, undefined,2)); }
     })

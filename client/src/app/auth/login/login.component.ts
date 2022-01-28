@@ -50,8 +50,6 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                  console.log(data);
-                  
                     this.notificationService.showSuccess("",data.message);
                     this.router.navigate(['/dashbaord']);
                     this.spinner.hide();

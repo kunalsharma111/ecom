@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { OrderService , AuthService } from '../../../services/index';
+import { OrderService , AuthService, NotificationService } from '../../../services/index';
 
 @Component({
   selector: 'app-myorders',
@@ -11,7 +11,8 @@ export class MyordersComponent implements OnInit {
   myorders:any;
   userDetails:any;
   constructor(private orderService : OrderService,
-    private authService : AuthService) { }
+    private authService : AuthService,
+    private notificationService : NotificationService) { }
 
   ngOnInit(): void {
     this.userDetails = this.authService.currentUserValue;
@@ -21,6 +22,13 @@ export class MyordersComponent implements OnInit {
   getMyOrders(id:any){
     this.orderService.getMyOrders(id).subscribe((data:any)=>{
       this.myorders = data?.data;
+    })
+  }
+
+  delete(id:any){
+    this.orderService.deleteOrder(id).subscribe((data:any)=>{
+      this.notificationService.showSuccess(data?.message,"");
+      this.getMyOrders(this.userDetails._id);
     })
   }
 

@@ -13,7 +13,7 @@ module.exports.addNewUser = async (req,res,next) => {
     if (user) {
         return res.status(400).send({message:'That user already exisits!'});
     } else {
-    user = new User(_.pick(req.body, ['firstName', 'lastName','userEmail','userMobile', 'userPassword','userType','userRole','userStatus','lastLoginTime','confirmationCode']));
+    user = new User(_.pick(req.body, ['firstName', 'lastName','userEmail','userMobile', 'userPassword','userType','userRole','userStatus','occupation','gender','lastLoginTime','confirmationCode']));
     await user.save((err)=>{
         if(err){
             res.status(500).send({ message: err });
@@ -32,11 +32,11 @@ module.exports.addToCart = async (req,res,next) => {
 }
 
 module.exports.getCartProducts = async (req,res,next) => {
-    let user = await User.findOne({_id:req.params.id});
+    let user = await User.findOne({_id:req.params.id},{"cart.createdAt":0,"cart.updatedAt":0});
     if(user.cart.length <=0){
         return res.status(200).send({message:'No Product in Cart'}); 
     }else{
-        return res.status(200).send({products:user.cart,message:'Cart Data Found'});
+        return res.status(200).send({products:user.cart,count:user.cart.length,message:'Cart Data Found'});
     }
 }
 

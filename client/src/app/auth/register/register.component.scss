@@ -20,6 +20,10 @@ $secondaryfont:'Source Sans Pro', sans-serif;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   }
+
+  .headcolor{
+    color: $primary;
+  }
   :root{
   scrollbar-color: rgb(210,210,210) rgb(46,54,69) !important;
   scrollbar-width: thin !important;

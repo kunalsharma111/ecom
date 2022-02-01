@@ -132,6 +132,19 @@
                     <input type="text" class="input txt" />
                   </div>
                 </div>
+                <div class="row">
+                  <div class="field small">
+                    <div class="title">Apply Coupon
+                    </div>
+                    <input type="text" class="input txt" name="coupon" [(ngModel)]="coupon" />
+                  </div>
+                  <div class="field small">
+                    <div class="title">&nbsp;
+                      <span class="numberCircle"> </span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-1" (click)="applyCoupon()">Apply Coupon</button>
+                  </div>
+                </div>
 
               </div>
             </form>
@@ -141,10 +154,22 @@
               <i class="icon icon-plane"></i> Shiping Information
             </div>
             <div class="details__user">
-              <div class="user__name">{{userDetails?.userEmail}}
+              <div class="user__name">
+                <input type="text" class="input txt text-validated" [(ngModel)]="email">
+                <div class="user__address">
+                  <!-- Shipping Address:  -->
+                  <br>
+                  <div class="form-group">
+                    <label for="userPhone">Choose Country</label>
+                    <select class="custom-select input txt text-validated"  [(ngModel)]="country" >
+                      <option value="" disabled>Choose your Country</option>
+                      <option *ngFor="let c of countries" [ngValue]="c.name.common">{{c.name.common}}</option>
+                   </select>
+                  </div>
+                </div>
+                  
                 <br> {{date | date}}</div>
-              <div class="user__address">Shipping Address: 
-                <br>Country</div>
+              
             </div>
 
           </div>
@@ -153,15 +178,16 @@
     </div>
     <div class="container">
       <div class="actions">
-        <a class="btnn action__submit" *ngIf="orders.orders.length > 1" (click)="confirmOrder()">Place All Order
+        <a class="btnn action__submit" *ngIf="orders.orders.length > 1" (click)="confirmOrder()">Place Order
           <i class="icon icon-arrow-right-circle"></i>
         </a>
 
         <a class="btnn action__submit" *ngIf="orders.orders.length == 1" (click)="confirmOrder()">Place Order
           <i class="icon icon-arrow-right-circle"></i>
         </a>
-        <button routerLink="/dashboard" class="btn btn-primary mt-5">Go Back to Shop</button>&nbsp;
-        <button routerLink="/dashboard/cart" class="btn btn-primary">Go Back to Cart</button>
+        <!-- <button routerLink="/dashboard" class="btn btn-primary mt-5">Go Back to Shop</button>&nbsp;
+        <button routerLink="/dashboard/cart" class="btn btn-primary">Go Back to Cart</button> -->
       </div>
       </div>
   </section>
+  <ngx-spinner></ngx-spinner>

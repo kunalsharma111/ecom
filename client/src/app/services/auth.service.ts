@@ -113,6 +113,13 @@ export class AuthService {
             }));
     }
 
+    newPassword(data:any){
+      return this.http.post<any>(`${environment.apiUrl}/auth/new-password`,data)
+            .pipe(map(user => {
+              return user;
+            }));
+    }
+
     logout() {
       // remove user from local storage and set current user to null
       localStorage.removeItem('token');

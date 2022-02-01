@@ -46,19 +46,23 @@
   
   <!--BANNER-->
   <div class="banner">
-  <section>
-  <h3>Practice Website for <em>Rahul Shetty Academy</em> Students</h3>
-  <h1 class="title">We Make Your Shopping Simple</h1>
-  <a routerLink="/auth/login" class="btn1">Login</a>
-   <!-- <a href="#" class="btn2">Contact Us</a> -->
-  </section>
+    <section>
+      <h3>We Make Your Shopping Simple</h3>
+    <h1 class="title">Practice Website for <em>Rahul Shetty Academy</em> Students</h1>
+    <a routerLink="/auth/register" class="btn1">Register</a>
+     <!-- <a class="btn2">Contact Us</a> -->
+    </section>
   <section>
         <div class="login-section-wrapper" style="background-color: white;">
           <div class="brand-wrapper">
           </div>
-          <div class="login-wrapper my-auto p-5">
+          <div class="login-wrapper my-auto p-5" *ngIf="showBox" style="text-align: center;">
+            <h1 class="headcolor">Account Created Successfully</h1>
+            <button class="btn btn-primary" routerLink="/auth">Login</button>
+          </div>
+          <div class="login-wrapper my-auto p-5" *ngIf="!showBox">
             <h1 class="login-title">Register</h1>
-            <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <form [formGroup]="registerForm" (ngSubmit)="register()" >
               <div class="row mb-2">
                 <div class="col-md-6">
                   <div class="form-group"> 
@@ -101,6 +105,26 @@
                   </div>
                 </div>
               </div>
+              <div class="row mb-2">
+                <div class="form-group col-md-6">
+                  <label for="userPhone">Occupation</label>
+                  <select class="custom-select" (change)="changeOcp($event)" formControlName="occupation">
+                    <option value="" disabled>Choose your occupation</option>
+                    <option *ngFor="let o of Ocp" [ngValue]="o">{{o}}</option>
+                 </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="userPhone">Gender</label>&nbsp; &nbsp;
+                  <label>
+                    <input type="radio" class="mt-3" value="Male" formControlName="gender">
+                      <span>Male</span>
+                  </label>&nbsp; &nbsp; &nbsp; &nbsp;
+                  <label>
+                    <input type="radio" class="mt-3" value="Female" formControlName="gender">
+                      <span>Female</span>
+                  </label>
+                </div>
+              </div>
              <div class="row mb-2">
                 <div class="form-group col-md-6">
                   <label for="password">Password</label>
@@ -108,8 +132,8 @@
                   [ngClass]="{'is-invalid':formSubmitted && f.userPassword.errors}" placeholder="Passsword">
                   <div *ngIf="formSubmitted && f.userPassword.errors" class="invalid-feedback">
                     <div *ngIf="f.userPassword.errors.required">*Password is required</div>
-                  <div *ngIf="f.userPassword.errors.pattern">Password must be strong</div>
-                  <div *ngIf="f.userPassword.errors.minlength">Password must be 8 character long</div>
+                  <!-- <div *ngIf="f.userPassword.errors.pattern">Password must be strong</div>
+                  <div *ngIf="f.userPassword.errors.minlength">Password must be 8 character long</div> -->
                   </div>
                 </div>
               <div class="form-group col-md-6">
@@ -121,6 +145,21 @@
                   <div *ngIf="f.confirmPassword.errors.mustMatch">Password and Confirm Password must match with each other.</div>
                 </div>
               </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-1" style="color: black;">
+                  <input type="checkbox" formControlName="required" [ngClass]="{'is-invalid':formSubmitted && f.required.errors}">
+                </div>
+                <div class="col-md-6"  style="color: black;">
+                  I am 18 year or Older
+                </div>
+                <div *ngIf="formSubmitted && f.required.errors" style="
+                width: 100%;
+                margin-top: 0.25rem;
+                font-size: 0.875em;
+                color: #dc3545;">
+                  <div *ngIf="f.required.errors.required">*Please check above checkbox</div>
+                </div>
               </div>
               <input name="login" id="login" class="btn btn-block login-btn" type="submit" value="Register">
             </form>

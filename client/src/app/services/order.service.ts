@@ -33,7 +33,13 @@ export class OrderService {
             }));
     }
 
-    
+    getAllCountry(){
+      return this.http.get<any>(`https://restcountries.com/v3.1/all`)
+            .pipe(map(user => {
+                return user;
+            }));
+      
+    }
 
     getAllOrders(){
       return this.http.get<any>(`${environment.apiUrl}/order/get-all-orders`)

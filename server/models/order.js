@@ -16,6 +16,9 @@ const orderSchema = new mongoose.Schema({
     productName: {
         type: String,
     },
+    country:{
+        type:String
+    },
     productDescription : {
         type: String,
     },

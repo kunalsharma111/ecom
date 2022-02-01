@@ -20,7 +20,7 @@ module.exports.createOrder = async (req,res,next) => {
         }
     }
     for(let i=0;i<req.body.orders.length;i++){
-        order = new Order(_.pick(req.body.orders[i], ['orderById','orderBy','orderDate','productOrderedId','productName','productDescription','productImage','orderPrice','orderRating']));
+        order = new Order(_.pick(req.body.orders[i], ['orderById','orderBy','orderDate','productOrderedId','productName','productDescription','productImage','orderPrice','orderRating','country']));
         orderIds.push(order._id);
         await order.save((err)=>{
             if(err){
@@ -51,23 +51,23 @@ module.exports.createOrder = async (req,res,next) => {
 }
 
 module.exports.getAllOrders = async (req,res,next) => {
-    let orders = await Order.find();
+    let orders = await Order.find({"createdAt":0,"updatedAt":0});
     if(!orders){
         return res.status(400).send({message:'Orders Not Found'});
     }
-    res.status(200).send({data:orders,message:'All Orders fetched Successfully'});
+    res.status(200).send({data:orders,count:orders.length,message:'All Orders fetched Successfully'});
 }
 
 module.exports.getOrderForCustomer = async (req,res,next) => {
-    let orders = await Order.find({ orderById : req.params.id });
+    let orders = await Order.find({ orderById : req.params.id },{"createdAt":0,"updatedAt":0});
     if (!orders) {
         return res.status(400).send({message:'Orders not found'});
     }
-    res.status(200).send({data:orders,message:'Orders fetched for customer Successfully'});
+    res.status(200).send({data:orders,count:orders.length,message:'Orders fetched for customer Successfully'});
 }
 
 module.exports.getOrderDetails = async (req,res,next) => {
-    let order = await Order.findOne({ _id : req.params.id });
+    let order = await Order.findOne({ _id : req.params.id },{"createdAt":0,"updatedAt":0,"orderDate":0});
     if (!order) {
         return res.status(400).send({message:'Order not found'});
     }

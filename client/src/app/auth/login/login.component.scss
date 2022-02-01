@@ -20,6 +20,17 @@ $secondaryfont:'Source Sans Pro', sans-serif;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   }
+
+  .blink_me {
+    animation: blinker 2s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+      color: $primary;
+    }
+  }
   :root{
   scrollbar-color: rgb(210,210,210) rgb(46,54,69) !important;
   scrollbar-width: thin !important;
@@ -703,13 +714,14 @@ $secondaryfont:'Source Sans Pro', sans-serif;
       margin-bottom: 54px; }
       label{
         color: $black;
-        font-weight: 700;
+        font-weight: 600;
       }
       .login-title {
             font-size: 30px;
             color: $primary;
             font-weight: bold;
-            margin-bottom: 25px; }
+            margin-bottom: 25px;
+          }
       .login-wrapper-footer-text {
       font-size: 16px;
       color: $primary;
@@ -720,7 +732,7 @@ $secondaryfont:'Source Sans Pro', sans-serif;
   background-color: lightgray;
 }
 .darkit{
-  color: $primary;
+  color: black;
 }
 // .brand-wrapper {
 //     padding-top: 7px;

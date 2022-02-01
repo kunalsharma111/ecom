@@ -68,22 +68,20 @@ module.exports.getAllProducts = async (req,res,next) => {
         console.log('Invalid key');
       }
     }
-     
     let query=Object.assign({},query1,query2,query3,query4,query5);
     await Product.aggregate([
       {
         $match:query
-    }]).exec(function(error,result){
+    },{ $unset: [ "createdAt", "updatedAt" ] }]).exec(function(error,result){
         if(error) {
           return res.status(500).send(error);
     }
     if(result.length <= 0){
         return res.status(200).send({data:result,message:'No Products Found'});
     }else{
-        return res.status(200).send({data:result,message:'All Products fetched Successfully'});
+        return res.status(200).send({data:result,count:result.length,message:'All Products fetched Successfully'});
     }
-    });
-
+    }); 
 
     // let products = await Product.find({productStatus:true});
     // if(!products){
@@ -93,7 +91,7 @@ module.exports.getAllProducts = async (req,res,next) => {
 }
 
 module.exports.getProductDetail = async (req,res,next) => {
-    let product = await Product.findOne({ _id: req.params.id });
+    let product = await Product.findOne({ _id: req.params.id },{"createdAt":0,"updatedAt":0});
     if (!product) {
         return res.status(400).send({message:'Product not found'});
     }

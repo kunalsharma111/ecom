@@ -16,6 +16,9 @@ export class RegisterComponent implements OnInit {
   formSubmitted = false;
   loading = false;
   showPassword : Boolean = false;
+  showBox: Boolean = false;
+  
+  Ocp: any = ['Doctor', 'Student', 'Engineer', 'Scientist'];
 
   constructor(private formBuilder : FormBuilder,
     private spinner: NgxSpinnerService,
@@ -26,6 +29,7 @@ export class RegisterComponent implements OnInit {
       if (this.authService.currentUserValue) {
         this.router.navigate(['/']);
         }
+        this.showBox = false;
      }
 
   ngOnInit(): void {
@@ -33,15 +37,18 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm(){
+    this.showBox = false;
     this.registerForm = this.formBuilder.group({
       firstName : ['',[Validators.required,Validators.minLength(3),Validators.maxLength(12)]],
       lastName : [''],
       userEmail : ['',[Validators.required,Validators.email]],
       userRole : ['customer'],
+      occupation : [''],
+      gender:[''],
       userMobile : ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern,Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      userPassword : ['',[Validators.required,Validators.minLength(8),
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
-      confirmPassword : ['',[Validators.required,Validators.minLength(8),]]
+      userPassword : ['',[Validators.required]],
+      confirmPassword : ['',[Validators.required]],
+      required:['',[Validators.required]]
     },{
       validator: this.MustMatch('userPassword', 'confirmPassword')
     })
@@ -77,7 +84,8 @@ export class RegisterComponent implements OnInit {
             .subscribe(
                 data => {
                     this.notificationService.showSuccess("",data.message);
-                    this.router.navigate(['/auth/login']);
+                    // this.router.navigate(['/auth/login']);
+                    this.showBox = true;
                     this.spinner.hide();
                 },
                 error => {
@@ -96,5 +104,10 @@ export class RegisterComponent implements OnInit {
     }else{
       this.navbarClass = "topnav";
     }
+  }
+  changeOcp(e:any){
+    this.registerForm.value.occupation.setValue(e.target.value, {
+      onlySelf: true
+    })
   }
 }

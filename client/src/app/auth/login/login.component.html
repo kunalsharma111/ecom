@@ -47,8 +47,8 @@
   <!--BANNER-->
   <div class="banner">
   <section>
-    <h3>Practice Website for <em>Rahul Shetty Academy</em> Students</h3>
-  <h1 class="title">We Make Your Shopping Simple</h1>
+    <h3>We Make Your Shopping Simple</h3>
+  <h1 class="title">Practice Website for <em>Rahul Shetty Academy</em> Students</h1>
   <a routerLink="/auth/register" class="btn1">Register</a>
    <!-- <a class="btn2">Contact Us</a> -->
   </section>
@@ -57,8 +57,8 @@
           <div class="brand-wrapper">
           </div>
 
-          <p class="demo">Demo Account to play , <label class="darkit">Email:customer@gmail.com &nbsp; Password : Admin@123</label> or<br>
-            Register to play with your account
+          <p class="demo"><label class="blink_me">Register to sign in with your personal account  or use below demo credentials to login</label>
+             <label class="darkit">Email:customer@gmail.com &nbsp; Password : Admin@123</label>
           </p>
           <div class="login-wrapper my-auto p-5">
             <h1 class="login-title">Log in</h1>
@@ -83,7 +83,7 @@
               
               <input name="login" id="login"  class="btn btn-block login-btn" type="submit" value="Login">
             </form>
-            <a class="forgot-password-link" [routerLink]="['/auth/forgot-password']">Forgot password?</a>
+            <a class="forgot-password-link" [routerLink]="['/auth/password-new']">Forgot password?</a>
             <p [routerLink]="['/auth/register']" class="login-wrapper-footer-text" style="cursor: pointer;">Don't have an account? <a  class="text-reset">Register here</a></p>
           </div>
         </div>

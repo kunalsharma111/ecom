@@ -3,7 +3,8 @@
   <!-- <h1 class="projTitle">Responsive Table<span>-Less</span> Shopping Cart</h1> -->
   <div class="heading cf">
     <h1>My Cart</h1>
-    <a routerLink="/dashboard" class="continue">Continue Shopping</a>
+    <!-- <a routerLink="/dashboard" class="continue">Continue Shopping</a> -->
+    <button type="button" style="float: right;" class="btn btn-primary" routerLink="/dashboard">Continue Shopping</button>
   </div>
   <div *ngIf="!cart && flag" style="text-align: center; margin-top: 15vh;">
     <h1 style="color: lightgray;">No Products in Your Cart !</h1>
@@ -65,14 +66,17 @@
   <a *ngIf="cart" href="#" class="btn"></a></div> -->
   
   <div class="subtotal cf" *ngIf="cart">
-    <ul>
+    <ul style="list-style-type:none">
       <li class="totalRow"><span class="label">Subtotal</span><span class="value">${{totalBill}}</span></li>
-      
+      <li class="totalRow"><span class="label">Total</span><span class="value">${{totalBill}}</span></li>
           <!-- <li class="totalRow"><span class="label">Shipping</span><span class="value">${{shipping}}</span></li>
       
             <li class="totalRow"><span class="label">Tax</span><span class="value">${{taxes}}</span></li> -->
-            <li class="totalRow final"><span class="label">Total</span><span class="value">${{totalBill}}</span></li>
-      <li class="totalRow"><a style="background-color: lightgreen;" class="btn continue" (click)="buyAll()" >Buy All</a></li>
+            <!-- <li class="totalRow final"><span class="label">Total</span><span class="value">${{totalBill}}</span></li> -->
+      <li class="totalRow">
+        <button type="button" class="btn btn-primary" (click)="buyAll()">Checkout</button>
+        <!-- <a  class="continue" (click)="buyAll()" >Buy All</a> -->
+      </li>
     </ul>
   </div>
 </div>

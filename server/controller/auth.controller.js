@@ -15,7 +15,7 @@ module.exports.registerUser = async (req,res,next) => {
     } else {
 
     // Insert the new user if they do not exist yet
-    user = new User(_.pick(req.body, ['firstName','lastName', 'userEmail','userMobile', 'userPassword','userType','userStatus','cart']));
+    user = new User(_.pick(req.body, ['firstName','lastName', 'userEmail','userMobile', 'userPassword','userType','userStatus','cart','occupation','gender']));
     await user.save((err)=>{
         if(err){
             res.status(500).send({ message: err });
@@ -53,7 +53,7 @@ module.exports.loginUser = async (req,res,next) => {
         }
         const token = jwt.sign({ _id: user._id,userName: user.userName, userEmail: user.userEmail,userMobile : user.userMobile,
             userType: user.userType,userRole:user.userRole }, process.env.JWT_PRIVATE_KEY,{expiresIn:'1y'});
-        res.status(200).send({token:token,message:"Login Successfully"});
+        res.status(200).send({token:token,userId: user._id,message:"Login Successfully"});
 }
 
 // module.exports.verifyUser = async (req, res, next) => {
@@ -100,5 +100,20 @@ module.exports.confirmForgotPassword = async (req, res, next) => {
 module.exports.allUsers = async (req, res, next) => {
     let users = await User.find({});
     if(!users){ return res.status(400).send({message:"No Users Found"}); }
-    return res.status(200).send({data:users,message:"All Users Fetched Successfully"});
+    return res.status(200).send({data:users,count:users.length,message:"All Users Fetched Successfully"});
 }
+
+module.exports.newPassword = async (req, res, next) => {
+    if(req.body.userPassword == undefined || req.body.userPassword == ''){
+        return res.status(400).send({message:'Password is required'});
+    }
+    let user = await User.findOne({ userEmail : req.body.userEmail});
+    if (!user) {
+        return res.status(404).send({ message: "User Not found." });
+    }
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(req.body.userPassword, salt);
+    let active = await User.updateOne({userEmail : req.body.userEmail},{$set:{userPassword : user.password}})
+    return res.status(200).send({message:"Password Changed Successfully"});
+}
+

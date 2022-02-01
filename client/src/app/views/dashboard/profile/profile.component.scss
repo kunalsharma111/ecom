@@ -408,4 +408,34 @@ width: 100%;
 text-align: center;
 }
 }
- 
+.continue {
+  &:link , &:visited {
+    text-decoration: none;
+    font-family: $fontSans;
+    letter-spacing: -.015em;
+    font-size: .75em;
+    padding: 1em;
+    color: #fff;
+    background: #82ca9c;
+    font-weight: bold;
+    border-radius: 50px;
+  float: right;
+    text-align: right;
+     @include transition(all, .25s, linear);
+  }
+  &:after {
+    content: "\276f";
+    padding: .5em;
+    position: relative;
+    right:0;
+     @include transition(all, .15s, linear);
+    
+  }
+  &:hover , &:focus, &:active {
+    background: #f69679;
+    
+    &:after {
+      right: -10px;
+    }
+  }
+}

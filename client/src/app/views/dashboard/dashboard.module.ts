@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -33,7 +34,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    RouterModule
+    RouterModule,
+    NgxSpinnerModule
   ]
 })
 export class DashboardModule { }

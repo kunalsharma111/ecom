@@ -42,6 +42,12 @@ const userSchema = new mongoose.Schema({
     userRole:{
         type : String,
     },
+    occupation:{
+        type: String
+    },
+    gender:{
+        type:String
+    },
     cart:{
         type: []
     },

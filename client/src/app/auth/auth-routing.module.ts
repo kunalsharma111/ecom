@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NewPasswordComponent } from './new-password/new-password.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { PasswordNewComponent } from './password-new/password-new.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path : 'confirm-forgot-password-otp/:otp',
     component : NewPasswordComponent
+  },
+  {
+    path : 'password-new',
+    component : PasswordNewComponent
   },
   // {
   //   path : 'confirm-account/:otp',

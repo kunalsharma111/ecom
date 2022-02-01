@@ -7,6 +7,8 @@ nav {
   height: 60px;
   max-width: 100%;
   border-bottom: 1px solid rgba(128, 128, 128,0.1);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: rgba(256,256, 256, 1);
 }
 label.logo {
   // color: cornsilk;
@@ -15,6 +17,10 @@ label.logo {
   font-weight: bold;
   line-height: 60px;
   margin-left: 40px;
+}
+.btn {
+  background-color: #96161f;
+  border: none;
 }
 nav ul {
   float: right;

@@ -4,6 +4,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxTypeaheadModule } from 'ngx-typeahead';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -35,7 +36,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     ReactiveFormsModule,
     NgxPaginationModule,
     RouterModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxTypeaheadModule
   ]
 })
 export class DashboardModule { }

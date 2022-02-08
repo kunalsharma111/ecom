@@ -59,11 +59,20 @@ module.exports.getAllOrders = async (req,res,next) => {
 }
 
 module.exports.getOrderForCustomer = async (req,res,next) => {
+    if(req.user._id != req.params.id && req.user.userEmail != 'admin@gmail.com'){
+        return res.status(400).send({message:'No Orders'});
+    }
     let orders = await Order.find({ orderById : req.params.id },{"createdAt":0,"updatedAt":0});
     if (!orders) {
         return res.status(400).send({message:'Orders not found'});
     }
-    res.status(200).send({data:orders,count:orders.length,message:'Orders fetched for customer Successfully'});
+    for(let i=0;i<orders.length;i++){
+        orders[i].productOrderedId = orders[i].orderDate.toString().substring(0,10);
+        orders[i].orderDate = null;
+        if(i == orders.length - 1){
+            return res.status(200).send({data:orders,count:orders.length,message:'Orders fetched for customer Successfully'});
+        }
+    }
 }
 
 module.exports.getOrderDetails = async (req,res,next) => {
@@ -71,14 +80,22 @@ module.exports.getOrderDetails = async (req,res,next) => {
     if (!order) {
         return res.status(400).send({message:'Order not found'});
     }
+    if(req.user._id != order?.orderById && req.user.userEmail != 'admin@gmail.com'){
+        return res.status(400).send({message:'No Such Order'});
+    }
     res.status(200).send({data:order,message:'Orders fetched for customer Successfully'});
 }
 
 module.exports.deleteOrder = async (req,res,next) => {
-    let order = await Order.deleteOne({_id: req.params.id});
-    if(!order){
+    let or = await Order.findOne({ _id : req.params.id });
+    if(!or){
         return res.status(400).send({message:'Order not found'});
     }
+    else if(req.user._id != or?.orderById && req.user.userEmail != 'admin@gmail.com'){
+        return res.status(400).send({message:'No Such Order'});
+    }
+    let order = await Order.deleteOne({_id: req.params.id});
+
     res.status(200).send({message:'Orders Deleted Successfully'});
 }
 

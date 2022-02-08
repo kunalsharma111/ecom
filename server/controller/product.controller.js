@@ -7,12 +7,25 @@ const _ = require('lodash');
 const Product = mongoose.model('Product');
 
 module.exports.addNewProduct = async (req,res,next) => {
+    if(req.user.userEmail != 'admin@gmail.com'){
+      let productCount = await Product.find({productAddedBy:req.body.productAddedBy}).sort({"createdAt": -1});;
+      if(productCount.length >=6){
+          let del = await Product.deleteOne({_id:productCount[productCount.length-1]._id});
+      }
+    }
+    else if(req.user.userEmail == 'admin@gmail.com'){
+      let productCount = await Product.find({productAddedBy:req.body.productAddedBy}).sort({"createdAt": -1});;
+      if(productCount.length >=3){
+          let del = await Product.deleteOne({_id:productCount[productCount.length-1]._id});
+      }
+    }
+    
     let product = await Product.findOne({ productName: req.body.productName });
     if (product) {
         return res.status(400).send({message:'Product already exisits!'});
     } else {
     product = new Product(_.pick(req.body, ['productName', 'productCategory','productSubCategory', 'productPrice','productDescription',
-    'productRating','productTotalOrders','productStatus','productFor','productImage']));
+    'productRating','productTotalOrders','productStatus','productFor','productImage','productAddedBy']));
     await product.save((err)=>{
         if(err){
             res.status(500).send({ message: err });
@@ -68,7 +81,7 @@ module.exports.getAllProducts = async (req,res,next) => {
         console.log('Invalid key');
       }
     }
-    let query=Object.assign({},query1,query2,query3,query4,query5);
+    let query=Object.assign({$or:[{productAddedBy:'admin@gmail.com'},{productAddedBy:req.user._id}]},query1,query2,query3,query4,query5);
     await Product.aggregate([
       {
         $match:query
@@ -98,3 +111,14 @@ module.exports.getProductDetail = async (req,res,next) => {
     res.status(200).send({data:product,message:'Product Details fetched Successfully'});
 }
 
+module.exports.deleteProduct = async (req,res,next) => {
+  let product = await Product.findOne({ _id: req.params.id },{"createdAt":0,"updatedAt":0});
+  if(!product){
+    return res.status(400).send({message:'Product not foundd'});
+  }
+  else if(product.productAddedBy != req.user._id  && req.user.userEmail != "admin@gmail.com"){
+    return res.status(400).send({message:'Product not found'});
+  }
+  let pro = await Product.deleteOne({_id: req.params.id});
+  res.status(200).send({message:'Product Deleted Successfully'});
+}

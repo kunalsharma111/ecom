@@ -28,8 +28,28 @@ export class PasswordNewComponent implements OnInit {
   createForm(){
     this.forgotForm = this.formBuilder.group({
       userEmail : ['',[Validators.required,Validators.email]],
-      userPassword : ['',[Validators.required]]
+      userPassword : ['',[Validators.required]],
+      confirmPassword : ['',[Validators.required]]
+    },{
+      validator: this.MustMatch('userPassword', 'confirmPassword')
     })
+  }
+
+  MustMatch(password1: string, password2: string) {
+    return (formGroup: FormGroup) => {
+        const pass = formGroup.controls[password1];
+        const confirmPass = formGroup.controls[password2];
+        if (confirmPass.errors && !confirmPass.errors.mustMatch) {
+            return;
+        }
+
+        // set error on confirmPass if validation fails
+        if (pass.value !== confirmPass.value) {
+              confirmPass.setErrors({ mustMatch: true });
+        } else {
+              confirmPass.setErrors(null);
+        }
+    }
   }
 
   get f(){ return this.forgotForm.controls; }

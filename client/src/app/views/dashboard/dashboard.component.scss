@@ -1,7 +1,14 @@
 * {
     box-sizing: border-box
 }
-
+.blink_me {
+    animation: blinker 2s linear infinite;
+  }
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 #search {
     outline: none;
     border: none;

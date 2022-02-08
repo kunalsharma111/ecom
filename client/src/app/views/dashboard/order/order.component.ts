@@ -5,6 +5,9 @@ import swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ProductsService, OrderService, NotificationService, AuthService } from '../../../services/index';
 
+import {Observable, OperatorFunction} from 'rxjs';
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -20,10 +23,10 @@ export class OrderComponent implements OnInit {
 
   name:any;
   email:any;
-  country:any;
+  country:any="";
   coupon:any;
 
-  countries : any;
+  countries : any = [];
 
   constructor(private activateRoute : ActivatedRoute,
     private productService : ProductsService,
@@ -34,6 +37,7 @@ export class OrderComponent implements OnInit {
     private router : Router) { }
 
   ngOnInit(): void {
+    this.showCouponError = false;
     this.date = new Date();
     this.userDetails = this.authService.currentUserValue;
     this.name = this.userDetails.userName;
@@ -51,7 +55,9 @@ export class OrderComponent implements OnInit {
 
   getAllCountries(){
     this.orderService.getAllCountry().subscribe((data:any)=>{
-      this.countries = data;
+      for(let i=0;i<data.length;i++){
+        this.countries.push(data[i].name?.common);
+      }
     })
   }
 
@@ -62,7 +68,7 @@ export class OrderComponent implements OnInit {
   }
 
   confirmOrder(){
-    if(this.email == "" || this.country == undefined){
+    if(this.email == "" || this.country == undefined || this.country == ""){
       this.notificationService.showError("","Please Enter Full Shipping Information");
       return
     }
@@ -99,9 +105,9 @@ export class OrderComponent implements OnInit {
     })
   }
 
+  showCouponError : Boolean = false;
   applyCoupon(){
-    console.log(this.coupon);
-
+    this.showCouponError = false;
     this.spinner.show();
     if(this.coupon == undefined || this.coupon == ""){
       this.notificationService.showError("","Please Enter Coupon");
@@ -110,13 +116,18 @@ export class OrderComponent implements OnInit {
     setTimeout(() => {
       if(this.coupon == "rahulshettyacademy"){
         this.spinner.hide();
-        this.notificationService.showSuccess("","Coupon Applied");
+        this.notificationService.showSuccess("","Coupon Applied"); 
       }else{
         this.spinner.hide();
-        this.notificationService.showError("","Invalid Coupon");
+        this.showCouponError = true;
+        // this.notificationService.showError("","Invalid Coupon");
       }
   }, 3000);
     
+  }
+
+  selectedStatic(result:any) {
+    this.country = result;
   }
 
 }

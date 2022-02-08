@@ -24,6 +24,9 @@ module.exports.addNewUser = async (req,res,next) => {
 }
 
 module.exports.addToCart = async (req,res,next) => {
+    if(req.body._id != req.user._id){
+        return res.status(400).send({message:'Not Authorized!'});
+    }
     User.updateOne({ _id: req.body._id }, { "$push": { "cart":  req.body.product  }}, { safe: true, multi:false }, function(err, obj) {
         res.status(200).send({message:"Product Added To Cart"})
     },err=>{
@@ -32,6 +35,9 @@ module.exports.addToCart = async (req,res,next) => {
 }
 
 module.exports.getCartProducts = async (req,res,next) => {
+    if(req.user._id != req.params.id && req.user.userEmail != 'admin@gmail.com'){
+        return res.status(400).send({message:'No Data Found'});
+    }
     let user = await User.findOne({_id:req.params.id},{"cart.createdAt":0,"cart.updatedAt":0});
     if(user.cart.length <=0){
         return res.status(200).send({message:'No Product in Cart'}); 
@@ -41,12 +47,18 @@ module.exports.getCartProducts = async (req,res,next) => {
 }
 
 module.exports.removeFromCart = async (req,res,next) => {
+    if(req.params.userid != req.user._id){
+        return res.status(400).send({message:'Not Authorized!'});
+    }
     User.updateOne({ _id: req.params.userid }, { "$pull": { "cart": { "_id": req.params.id } }}, { safe: true, multi:false }, function(err, obj) {
         return res.status(200).send({message:'Product Removed from cart'});
     });
 }
 
 module.exports.getCartCount = async (req,res,next) => {
+    if(req.user._id != req.params.id && req.user.userEmail != 'admin@gmail.com'){
+        return res.status(400).send({message:'No Data Found'});
+    }
     let user = await User.findOne({_id:req.params.id});
     if(user.cart.length <=0){
         return res.status(200).send({message:'No Product in Cart'}); 

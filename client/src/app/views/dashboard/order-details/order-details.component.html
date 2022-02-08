@@ -16,8 +16,8 @@
                       <div class='col-text -main'>{{orderDetails?._id}}</div>
                     </div>
                     <div class='col-md-6'>
-                      <small class='col-title'>Order Date</small>
-                      <div class='col-text'>{{orderDetails?.orderDate | date}}</div>
+                      <!-- <small class='col-title'>Order Date</small>
+                      <div class='col-text'>{{orderDetails?.orderDate | date}}</div> -->
                     </div>
                   </div>
                   <div class='row'>
@@ -29,14 +29,14 @@
                         <p class='text'>
                           {{orderDetails?.orderBy}}
                         </p>
-                        <p class='text'>
+                        <!-- <p class='text'>
                           Street
                         </p>
                         <p class='text'>
                           PIN
-                        </p>
+                        </p> -->
                         <p class='text'>
-                          Country
+                          Country - {{orderDetails?.country}}
                         </p>
                       </div>
                     </div>
@@ -48,14 +48,14 @@
                         <p class='text'>
                             {{orderDetails?.orderBy}}
                         </p>
-                        <p class='text'>
+                        <!-- <p class='text'>
                           Street
                         </p>
                         <p class='text'>
                           PIN
-                        </p>
+                        </p> -->
                         <p class='text'>
-                          Country
+                          Country - {{orderDetails?.country}}
                         </p>
                       </div>
                     </div>

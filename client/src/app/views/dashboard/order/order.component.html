@@ -137,12 +137,14 @@
                     <div class="title">Apply Coupon
                     </div>
                     <input type="text" class="input txt" name="coupon" [(ngModel)]="coupon" />
+                    <p *ngIf="showCouponError" style="color: red;" class="mt-1">* Invalid Coupon</p>
                   </div>
                   <div class="field small">
                     <div class="title">&nbsp;
                       <span class="numberCircle"> </span>
                     </div>
                     <button type="submit" class="btn btn-primary mt-1" (click)="applyCoupon()">Apply Coupon</button>
+                    
                   </div>
                 </div>
 
@@ -160,11 +162,16 @@
                   <!-- Shipping Address:  -->
                   <br>
                   <div class="form-group">
-                    <label for="userPhone">Choose Country</label>
-                    <select class="custom-select input txt text-validated"  [(ngModel)]="country" >
+                    <input [value]="country"
+                    ngxTypeahead
+                    class="input txt text-validated"
+                    [taList]="countries" 
+                    placeholder="Select Country"
+                    (taSelected)="selectedStatic($event)">
+                    <!-- <select class="custom-select input txt text-validated"  [(ngModel)]="country" >
                       <option value="" disabled>Choose your Country</option>
                       <option *ngFor="let c of countries" [ngValue]="c.name.common">{{c.name.common}}</option>
-                   </select>
+                   </select> -->
                   </div>
                 </div>
                   

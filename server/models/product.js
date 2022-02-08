@@ -41,6 +41,9 @@ const productSchema = new mongoose.Schema({
     },
     productFor: {
         type: String,
+    },
+    productAddedBy: {
+        type: String
     }
 },{
     timestamps: true

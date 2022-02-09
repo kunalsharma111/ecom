@@ -47,7 +47,6 @@ export class OrderComponent implements OnInit {
       this.listOfProducts = JSON.parse(params.prop);
     })
     this.orders = {
-      orderById : this.userDetails._id,
       orders: []
     }
     this.getAllProducts(this.listOfProducts);
@@ -73,16 +72,22 @@ export class OrderComponent implements OnInit {
       this.notificationService.showError("","Please Enter Full Shipping Information");
       return
     }
+    let finalOrders = [];
     for(let i=0;i<this.orders?.orders.length;i++){
-      this.orders.orders[i].orderBy = this.email;
-      this.orders.orders[i].country = this.country;
+      finalOrders.push({
+        country:this.country,
+        productOrderedId:this.orders.orders[i].productOrderedId
+      })
     }
-    this.orderService.placeOrder(this.orders).subscribe((data:any)=>{
+    let or = {
+      orders : finalOrders
+    }
+    this.orderService.placeOrder(or).subscribe((data:any)=>{
       this.notificationService.showSuccess("",data?.message);
       this.authService.changeCart(true);
       this.router.navigate(['/dashboard/thanks/'],{
         queryParams: {
-          prop: JSON.stringify(data.data)
+          prop: JSON.stringify(data.orders)
         }
       });
     })

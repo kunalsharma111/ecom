@@ -12,28 +12,45 @@ const User = mongoose.model('User');
 
 module.exports.createOrder = async (req,res,next) => {
     let orderIds = [];
-    let or = await Order.find({orderById:req.body.orderById}).sort({"createdAt": -1});
+    let productOrderedId = [];
+    let or = await Order.find({orderById:req.user._id}).sort({"createdAt": -1});
     if(or.length >= 25){
         for(let i=0;i<req.body.orders.length;i++){
             let del = await Order.deleteOne({_id:or[or.length-1]._id});
-            or = await Order.find({orderById:req.body.orderById}).sort({"createdAt": -1});
+            or = await Order.find({orderById:req.user._id}).sort({"createdAt": -1});
         }
     }
     for(let i=0;i<req.body.orders.length;i++){
-        order = new Order(_.pick(req.body.orders[i], ['orderById','orderBy','orderDate','productOrderedId','productName','productDescription','productImage','orderPrice','orderRating','country']));
+        let product = await Product.findOne({ _id: req.body.orders[i].productOrderedId });
+        if(!product){
+            return res.status(400).send({message:'Wrong Product ID'});
+        }
+        let temp = {
+            orderById: req.user._id,
+            orderBy: req.user.userEmail,
+            orderDate: new Date(),
+            orderPrice: product.productPrice,
+            productOrderedId: req.body.orders[i].productOrderedId,
+            productName: product.productName,
+            productDescription: product.productDescription,
+            productImage: product.productImage,
+            country: req.body.orders[i].country
+        }
+        order = new Order(_.pick(temp, ['orderById','orderBy','orderDate','productOrderedId','productName','productDescription','productImage','orderPrice','orderRating','country']));
         orderIds.push(order._id);
+        productOrderedId.push(order.productOrderedId);
         await order.save((err)=>{
             if(err){
                 res.status(500).send({ message: err });
                 return;
             }else{
-                User.updateOne({ _id: req.body.orderById }, { "$pull": { "cart": { "_id": req.body.orders[i].productOrderedId } }}, { safe: true, multi:false }, function(err, obj) {     
+                User.updateOne({ _id: req.user._id }, { "$pull": { "cart": { "_id": req.body.orders[i].productOrderedId } }}, { safe: true, multi:false }, function(err, obj) {     
             });
             }
         }); 
     }
 
-    res.status(200).send({data:orderIds,message:'Order Placed Successfully'});
+    res.status(201).send({orders:orderIds,productOrderId:productOrderedId,message:'Order Placed Successfully'});
 
 
 

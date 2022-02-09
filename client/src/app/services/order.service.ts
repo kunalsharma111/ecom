@@ -57,7 +57,6 @@ export class OrderService {
 
     downloadFile(data:any, filename='data') {
       let csvData = this.ConvertToCSV(data, ['Product Name','Product Description', 'Product Price', 'Address', 'Ordered By']);
-      console.log(csvData)
       let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
       let dwldLink = document.createElement("a");
       let url = URL.createObjectURL(blob);

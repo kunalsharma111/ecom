@@ -31,7 +31,7 @@ module.exports.addNewProduct = async (req,res,next) => {
             res.status(500).send({ message: err });
             return;
         }
-        res.status(200).send({message:'Product Added Successfully'});
+        res.status(201).send({productId:product._id,message:'Product Added Successfully'});
     });
     // }
 }

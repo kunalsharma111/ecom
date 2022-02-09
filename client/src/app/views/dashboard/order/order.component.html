@@ -186,11 +186,11 @@
     </div>
     <div class="container">
       <div class="actions">
-        <a class="btnn action__submit" *ngIf="orders.orders.length > 1" (click)="confirmOrder()">Place Order
+        <a class="btnn action__submit" style="cursor: pointer;" *ngIf="orders.orders.length > 1" (click)="confirmOrder()">Place Order
           <i class="icon icon-arrow-right-circle"></i>
         </a>
 
-        <a class="btnn action__submit" *ngIf="orders.orders.length == 1" (click)="confirmOrder()">Place Order
+        <a class="btnn action__submit" style="cursor: pointer;" *ngIf="orders.orders.length == 1" (click)="confirmOrder()">Place Order
           <i class="icon icon-arrow-right-circle"></i>
         </a>
         <!-- <button routerLink="/dashboard" class="btn btn-primary mt-5">Go Back to Shop</button>&nbsp;

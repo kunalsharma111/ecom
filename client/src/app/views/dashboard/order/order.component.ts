@@ -38,6 +38,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.showCouponError = false;
+    this.showCouponApplied = false;
     this.date = new Date();
     this.userDetails = this.authService.currentUserValue;
     this.name = this.userDetails.userName;
@@ -106,17 +107,21 @@ export class OrderComponent implements OnInit {
   }
 
   showCouponError : Boolean = false;
+  showCouponApplied : Boolean = false;
   applyCoupon(){
     this.showCouponError = false;
+    this.showCouponApplied = false;
     this.spinner.show();
     if(this.coupon == undefined || this.coupon == ""){
       this.notificationService.showError("","Please Enter Coupon");
+      this.spinner.hide();
       return;
     }
     setTimeout(() => {
       if(this.coupon == "rahulshettyacademy"){
         this.spinner.hide();
-        this.notificationService.showSuccess("","Coupon Applied"); 
+        this.showCouponApplied = true;
+        // this.notificationService.showSuccess("","Coupon Applied"); 
       }else{
         this.spinner.hide();
         this.showCouponError = true;

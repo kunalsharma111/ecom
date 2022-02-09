@@ -2,7 +2,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 offset-md-5">
-            <div class='email-wrapper'>
+          <div class="email-wrapper ml-5" *ngIf="!orderDetails && show" style="text-align: center; font-weight: 800;">
+            <p class="blink_me">You Are Not Authorized</p>
+          </div>
+            <div class='email-wrapper'  *ngIf="orderDetails">
                 <div class='email-preheader'>
                   <p class='tagline'>Thank you for Shopping With Us</p>
                 </div>

@@ -19,6 +19,15 @@ $solid-black:             #000;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.blink_me {
+  animation: blinker 2s linear infinite;
+  color: red;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
 
 body {
   background: $darkest-blue;

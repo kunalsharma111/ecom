@@ -76,7 +76,7 @@ module.exports.getOrderForCustomer = async (req,res,next) => {
 }
 
 module.exports.getOrderDetails = async (req,res,next) => {
-    let order = await Order.findOne({ _id : req.params.id },{"createdAt":0,"updatedAt":0,"orderDate":0});
+    let order = await Order.findOne({ _id : req.query.id },{"createdAt":0,"updatedAt":0,"orderDate":0});
     if (!order) {
         return res.status(400).send({message:'Order not found'});
     }

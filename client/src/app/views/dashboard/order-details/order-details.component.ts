@@ -10,7 +10,7 @@ import { OrderService } from '../../../services/index';
 })
 export class OrderDetailsComponent implements OnInit {
   orderDetails : any;
-  
+  show:Boolean= false;
   constructor(private activateRoute : ActivatedRoute,
     private orderService : OrderService) { }
 
@@ -20,7 +20,9 @@ export class OrderDetailsComponent implements OnInit {
 
   getOrderDetails(id:any){
     this.orderService.getOrderDetail(id).subscribe((data:any)=>{
-      this.orderDetails = data?.data;
+      this.orderDetails = data?.data; 
+    },err=>{
+      this.show = true;
     })
   }
 }

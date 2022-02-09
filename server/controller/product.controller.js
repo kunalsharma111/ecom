@@ -20,10 +20,10 @@ module.exports.addNewProduct = async (req,res,next) => {
       }
     }
     
-    let product = await Product.findOne({ productName: req.body.productName });
-    if (product) {
-        return res.status(400).send({message:'Product already exisits!'});
-    } else {
+    // let product = await Product.findOne({ productName: req.body.productName });
+    // if (product) {
+    //     return res.status(400).send({message:'Product already exisits!'});
+    // } else {
     product = new Product(_.pick(req.body, ['productName', 'productCategory','productSubCategory', 'productPrice','productDescription',
     'productRating','productTotalOrders','productStatus','productFor','productImage','productAddedBy']));
     await product.save((err)=>{
@@ -33,7 +33,7 @@ module.exports.addNewProduct = async (req,res,next) => {
         }
         res.status(200).send({message:'Product Added Successfully'});
     });
-    }
+    // }
 }
 
 module.exports.getAllProducts = async (req,res,next) => {

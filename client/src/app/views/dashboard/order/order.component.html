@@ -138,6 +138,7 @@
                     </div>
                     <input type="text" class="input txt" name="coupon" [(ngModel)]="coupon" />
                     <p *ngIf="showCouponError" style="color: red;" class="mt-1">* Invalid Coupon</p>
+                    <p *ngIf="showCouponApplied" style="color: green;" class="mt-1">* Coupon Applied</p>
                   </div>
                   <div class="field small">
                     <div class="title">&nbsp;

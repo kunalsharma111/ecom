@@ -23,6 +23,8 @@ export class ThanksorderComponent implements OnInit {
     this.showOrderDetails = false;
     this.activateRoute.queryParams.subscribe(params => {
       this.orderDetailss = JSON.parse(params.prop);
+    },err=>{
+      this.showOrderDetails = false
     })
     
     this.getAllProducts(this.orderDetailss);
@@ -45,21 +47,23 @@ export class ThanksorderComponent implements OnInit {
     })
   }
 
-  public openPDF():void {
-    let DATA :any= document.getElementById('htmlData');
-        
-    html2canvas(DATA).then(canvas => {
-        
-        let fileWidth = 208;
-        let fileHeight = (canvas.height * fileWidth / canvas.width)-30;
-        
-        const FILEURI = canvas.toDataURL("image/jpeg", 1.0);
-        let PDF = new jsPDF('p', 'mm', 'a4');
-        let position = 0;
-        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
-
-        PDF.save('orders.pdf');
-    });     
+  openCSV(){
+    let orders = [];
+    let fileName = "";
+    for(let i=0;i<this.allOrders.length;i++){
+      fileName = this.allOrders[i].orderBy.substring(0,this.allOrders[i].orderBy.indexOf('@'));
+      let obj = {
+        "Product Name":this.allOrders[i].productName,
+        "Product Description":this.allOrders[i].productDescription,
+        "Product Price":this.allOrders[i].orderPrice,
+        "Address":this.allOrders[i].country,
+        "Ordered By":this.allOrders[i].orderBy
+      }
+      orders.push(obj);
+      if((this.allOrders.length - 1) == i){
+        this.orderService.downloadFile(orders,'order-invoice_'+fileName);
+      }
     }
+  } 
 
 }

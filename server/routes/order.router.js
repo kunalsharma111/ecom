@@ -8,7 +8,7 @@ const { orderValidator,orderValidationResult } = require('../validators/order.va
 router.post('/create-order',auth ,createOrder);
 router.get('/get-all-orders',auth,getAllOrders);
 router.get('/get-orders-for-customer/:id',auth,getOrderForCustomer);
-router.get('/get-orders-details/:id',auth,getOrderDetails);
+router.get('/get-orders-details',auth,getOrderDetails);
 router.delete('/delete-order/:id',auth,deleteOrder);
 
 module.exports = router;

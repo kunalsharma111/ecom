@@ -9,8 +9,8 @@
         "AWS_SECRET":"*********",
         "AWS_BUCKET_NAME":"********",
         "AWS_REGION":"********",
-        "email":"careercode2022@gmail.com",
-        "password":"Career501!"
+        "email":"",
+        "password":""
     },
     "production": {
         "PORT":6000,

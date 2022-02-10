@@ -53,6 +53,7 @@ export class ThanksorderComponent implements OnInit {
     for(let i=0;i<this.allOrders.length;i++){
       fileName = this.allOrders[i].orderBy.substring(0,this.allOrders[i].orderBy.indexOf('@'));
       let obj = {
+        "Invoice Number":this.allOrders[i]._id,
         "Product Name":this.allOrders[i].productName,
         "Product Description":this.allOrders[i].productDescription,
         "Product Price":this.allOrders[i].orderPrice,

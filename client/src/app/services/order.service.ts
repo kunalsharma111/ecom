@@ -27,7 +27,7 @@ export class OrderService {
     }
 
     getOrderDetail(id:any){
-      return this.http.get<any>(`${environment.apiUrl}/order/get-orders-details/?id=${id}`)
+      return this.http.get<any>(`${environment.apiUrl}/order/get-orders-details?id=${id}`)
             .pipe(map(user => {
                 return user;
             }));
@@ -56,7 +56,7 @@ export class OrderService {
     }
 
     downloadFile(data:any, filename='data') {
-      let csvData = this.ConvertToCSV(data, ['Product Name','Product Description', 'Product Price', 'Address', 'Ordered By']);
+      let csvData = this.ConvertToCSV(data, ['Invoice Number','Product Name','Product Description', 'Product Price', 'Address', 'Ordered By']);
       let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
       let dwldLink = document.createElement("a");
       let url = URL.createObjectURL(blob);

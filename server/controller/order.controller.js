@@ -83,6 +83,9 @@ module.exports.getOrderForCustomer = async (req,res,next) => {
     if (!orders) {
         return res.status(400).send({message:'Orders not found'});
     }
+    if(orders.length==0){
+        return res.status(400).send({data:orders,message:'No Orders'});
+    }
     for(let i=0;i<orders.length;i++){
         orders[i].productOrderedId = orders[i].orderDate.toString().substring(0,10);
         orders[i].orderDate = null;

@@ -10,6 +10,7 @@ import { OrderService , AuthService, NotificationService } from '../../../servic
 export class MyordersComponent implements OnInit {
   myorders:any;
   userDetails:any;
+  showIt:Boolean= false;
   constructor(private orderService : OrderService,
     private authService : AuthService,
     private notificationService : NotificationService) { }
@@ -22,6 +23,7 @@ export class MyordersComponent implements OnInit {
   getMyOrders(id:any){
     this.orderService.getMyOrders(id).subscribe((data:any)=>{
       this.myorders = data?.data;
+      this.showIt = true;
     })
   }
 

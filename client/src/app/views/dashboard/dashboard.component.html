@@ -91,7 +91,7 @@
     </form>
 </section>
 <!-- products section -->
-<section id="products">
+<section id="products" style="margin-top: 0vh !important;">
     <div class="container">
         <div class="d-flex flex-row mb-2">
             <div class="text-muted m-2" id="res">Showing {{products?.length}} results &nbsp; | </div>
@@ -113,8 +113,8 @@
                             <div class="text-muted">$ {{product?.productPrice}}</div>
                             <!-- <div class="ml-auto"> <button class="border rounded bg-white sign"><span class="fa fa-plus" id="orange"></span></button> <span class="px-sm-1">1 loaf</span> <button class="border rounded bg-white sign"><span class="fa fa-minus" id="orange"></span></button> </div> -->
                         </div>
-                        <button class="btn w-50 rounded my-2" routerLink="/dashboard/product-details/{{product?._id}}" ><i class="fa fa-eye" aria-hidden="true"></i> View</button>
-                        <button class="btn w-50 rounded my-2" (click)="addToCart(product)" >Add To Cart</button>
+                        <button class="btn w-40 rounded" routerLink="/dashboard/product-details/{{product?._id}}" ><i class="fa fa-eye" aria-hidden="true"></i> View</button>
+                        <button class="btn w-10 rounded" style="float: right;" (click)="addToCart(product)" ><i class="fa fa-shopping-cart"></i> Add To Cart</button>
                     </div>
                 </div>
             </div>
@@ -126,4 +126,4 @@
         </div>
     </div>
 </section>
-<div class="footer">Design and Developed By - sharmakunal315@gmail.com</div>
+<div class="footer">Design and Developed By - Kunal Sharma</div>

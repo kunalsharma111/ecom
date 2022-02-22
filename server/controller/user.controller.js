@@ -66,3 +66,8 @@ module.exports.getCartCount = async (req,res,next) => {
         return res.status(200).send({count:user.cart.length,message:'Cart Data Found'});
     }
 }
+
+module.exports.logout = async (req,res,next) => {
+    let user = await User.updateOne({_id:req.user._id},{$set:{cart:[]}});
+    return res.status(200).send({message:'Logout Successfully'});
+}

@@ -51,6 +51,7 @@ module.exports.loginUser = async (req,res,next) => {
         if (!validPassword) {
             return res.status(400).send({message:'Incorrect email or password.'});
         }
+        let userr = await User.updateOne({userEmail: req.body.userEmail},{$set:{cart:[]}});
         const token = jwt.sign({ _id: user._id,userName: user.userName, userEmail: user.userEmail,userMobile : user.userMobile,
             userType: user.userType,userRole:user.userRole }, process.env.JWT_PRIVATE_KEY,{expiresIn:'1y'});
         res.status(200).send({token:token,userId: user._id,message:"Login Successfully"});

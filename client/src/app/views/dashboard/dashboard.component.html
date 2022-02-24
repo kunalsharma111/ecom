@@ -108,9 +108,9 @@
             <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mb-3" *ngFor="let product of products | paginate : {itemsPerPage : itemsPerPage,currentPage:p,totalItems:totalItems}">
                 <div class="card"> <img class="card-img-top" src="{{product?.productImage}}">
                     <div class="card-body">
-                        <h5><b>{{product?.productName}}</b> </h5>
+                        <h5 style="text-transform: uppercase;"><b>{{product?.productName}}</b> </h5>
                         <div class="d-flex flex-row my-2">
-                            <div class="text-muted">$ {{product?.productPrice}}</div>
+                            <div class="text-muted" style="font-weight: 300;">$ {{product?.productPrice}}</div>
                             <!-- <div class="ml-auto"> <button class="border rounded bg-white sign"><span class="fa fa-plus" id="orange"></span></button> <span class="px-sm-1">1 loaf</span> <button class="border rounded bg-white sign"><span class="fa fa-minus" id="orange"></span></button> </div> -->
                         </div>
                         <button class="btn w-40 rounded" routerLink="/dashboard/product-details/{{product?._id}}" ><i class="fa fa-eye" aria-hidden="true"></i> View</button>

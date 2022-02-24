@@ -121,12 +121,12 @@ export class AuthService {
     }
 
     logout() {
-      this.http.get<any>(`${environment.apiUrl}/user/logout`).subscribe((data:any)=>{
+      // this.http.get<any>(`${environment.apiUrl}/user/logout`).subscribe((data:any)=>{
         // remove user from local storage and set current user to null
         localStorage.removeItem('token');
         this.currentUserSubject.next(null!);
-        this.notificationService.showSuccess(data?.message,"");
+        this.notificationService.showSuccess("Logout Successfully","");
         this.router.navigate(['/auth/login']);
-      })           
+      // })           
   }
 }

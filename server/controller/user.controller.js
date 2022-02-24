@@ -27,8 +27,16 @@ module.exports.addToCart = async (req,res,next) => {
     if(req.body._id != req.user._id){
         return res.status(400).send({message:'Not Authorized!'});
     }
+    let user = await User.findOne({_id:req.user._id});
+    if(user.cart.length>0){
+        for(let i=0;i<user.cart.length;i++){
+            if(user.cart[i].productName == req.body.product.productName){
+                return res.status(200).send({message:"Product Added To Cart"})       
+            }
+        }
+    }
     User.updateOne({ _id: req.body._id }, { "$push": { "cart":  req.body.product  }}, { safe: true, multi:false }, function(err, obj) {
-        res.status(200).send({message:"Product Added To Cart"})
+        return res.status(200).send({message:"Product Added To Cart"})
     },err=>{
         return res.status(400).send({message:'Not Able to Add'});
     });

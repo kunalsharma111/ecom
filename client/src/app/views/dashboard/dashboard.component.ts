@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 import { ProductsService, NotificationService,AuthService } from '../../services/index';
 
 @Component({
@@ -19,6 +21,8 @@ export class DashboardComponent implements OnInit {
   itemsPerPage = 9;
   totalItems : any;
 
+  
+
   categories = ["fashion","electronics","household"];
   subCategories = ["t-shirts","shirts","shoes","mobiles","laptops"];
   genders = ["men","women"];
@@ -26,9 +30,13 @@ export class DashboardComponent implements OnInit {
     private authService : AuthService,
     private formBuilder : FormBuilder,
     private notificationService : NotificationService,
-    private router : Router) { }
+    private router : Router,
+    private spinner: NgxSpinnerService) { }
+
+    details : any;
 
   ngOnInit(): void {
+    this.details = this.authService.currentUserValue
     this.createForm();
     this.getAllProducts();
   }
@@ -59,6 +67,11 @@ export class DashboardComponent implements OnInit {
       }
       this.products = data?.data;
       this.totalItems = this.products.length;
+      for(let i=0;i<3;i++){
+        this.authService.getCartCount(this.details._id).subscribe((data:any)=>{
+          console.log(i);
+        })
+      }
     })
   }
 
@@ -106,13 +119,17 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/dashboard/order/'+id]);
   }
   addToCart(product:any){
+    this.spinner.show();
     let user:any = this.authService.currentUserValue;
     let data = {
       _id:user._id,
       product : product
     }
     this.authService.addToCart(data).subscribe((data:any)=>{
-     this.notificationService.showSuccess(data?.message,''); 
+      setTimeout(() => {
+     this.notificationService.showSuccess(data?.message,'');
+     this.spinner.hide();
+    }, 1000); 
      this.authService.changeCart(true);
     })
   }

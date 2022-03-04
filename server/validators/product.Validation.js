@@ -1,6 +1,7 @@
 const { check, validationResult } = require('express-validator');
 
 exports.productValidationResult = (req,res,next) =>{
+    console.log(req);
     const result = validationResult(req)
     if(!result.isEmpty()){
         const error = result.array()[0].msg;

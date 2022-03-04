@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Sanitizer } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { DomSanitizer } from "@angular/platform-browser";
 import { NgxSpinnerService } from "ngx-spinner";
 
 import { ProductsService, NotificationService,AuthService } from '../../services/index';
@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   subCategories = ["t-shirts","shirts","shoes","mobiles","laptops"];
   genders = ["men","women"];
   constructor(private productService : ProductsService,
+    private sanitizer: DomSanitizer,
     private authService : AuthService,
     private formBuilder : FormBuilder,
     private notificationService : NotificationService,

@@ -14,7 +14,7 @@ module.exports.createOrder = async (req,res,next) => {
     let orderIds = [];
     let productOrderedId = [];
     let or = await Order.find({orderById:req.user._id}).sort({"createdAt": -1});
-    if(or.length >= 25){
+    if(or.length >= 7){
         for(let i=0;i<req.body.orders.length;i++){
             let del = await Order.deleteOne({_id:or[or.length-1]._id});
             or = await Order.find({orderById:req.user._id}).sort({"createdAt": -1});

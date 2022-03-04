@@ -6,35 +6,6 @@ const _ = require('lodash');
 
 const Product = mongoose.model('Product');
 
-module.exports.addNewProduct = async (req,res,next) => {
-    if(req.user.userEmail != 'admin@gmail.com'){
-      let productCount = await Product.find({productAddedBy:req.body.productAddedBy}).sort({"createdAt": -1});;
-      if(productCount.length >=6){
-          let del = await Product.deleteOne({_id:productCount[productCount.length-1]._id});
-      }
-    }
-    else if(req.user.userEmail == 'admin@gmail.com'){
-      let productCount = await Product.find({productAddedBy:req.body.productAddedBy}).sort({"createdAt": -1});;
-      if(productCount.length >=3){
-          let del = await Product.deleteOne({_id:productCount[productCount.length-1]._id});
-      }
-    }
-    
-    // let product = await Product.findOne({ productName: req.body.productName });
-    // if (product) {
-    //     return res.status(400).send({message:'Product already exisits!'});
-    // } else {
-    product = new Product(_.pick(req.body, ['productName', 'productCategory','productSubCategory', 'productPrice','productDescription',
-    'productRating','productTotalOrders','productStatus','productFor','productImage','productAddedBy']));
-    await product.save((err)=>{
-        if(err){
-            res.status(500).send({ message: err });
-            return;
-        }
-        res.status(201).send({productId:product._id,message:'Product Added Successfully'});
-    });
-    // }
-}
 
 module.exports.getAllProducts = async (req,res,next) => {
     const details=req.body;

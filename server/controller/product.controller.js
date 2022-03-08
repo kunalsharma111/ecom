@@ -88,7 +88,7 @@ module.exports.deleteProduct = async (req,res,next) => {
     return res.status(400).send({message:'Product not foundd'});
   }
   else if(product.productAddedBy != req.user._id  && req.user.userEmail != "admin@gmail.com"){
-    return res.status(400).send({message:'Product not found'});
+    return res.status(403).send({message:'You are not authorize to delete this product'});
   }
   let pro = await Product.deleteOne({_id: req.params.id});
   res.status(200).send({message:'Product Deleted Successfully'});

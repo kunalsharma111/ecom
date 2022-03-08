@@ -77,7 +77,7 @@ module.exports.getAllOrders = async (req,res,next) => {
 
 module.exports.getOrderForCustomer = async (req,res,next) => {
     if(req.user._id != req.params.id && req.user.userEmail != 'admin@gmail.com'){
-        return res.status(400).send({message:'No Orders'});
+        return res.status(403).send({message:'You are not authorize to view these orders'});
     }
     let orders = await Order.find({ orderById : req.params.id },{"createdAt":0,"updatedAt":0});
     if (!orders) {
@@ -101,7 +101,7 @@ module.exports.getOrderDetails = async (req,res,next) => {
         return res.status(400).send({message:'Order not found'});
     }
     if(req.user._id != order?.orderById && req.user.userEmail != 'admin@gmail.com'){
-        return res.status(400).send({message:'No Such Order'});
+        return res.status(403).send({message:'You are not authorize to view this order'});
     }
     res.status(200).send({data:order,message:'Orders fetched for customer Successfully'});
 }
@@ -112,7 +112,7 @@ module.exports.deleteOrder = async (req,res,next) => {
         return res.status(400).send({message:'Order not found'});
     }
     else if(req.user._id != or?.orderById && req.user.userEmail != 'admin@gmail.com'){
-        return res.status(400).send({message:'No Such Order'});
+        return res.status(400).send({message:'You are not authorize to delete this order'});
     }
     let order = await Order.deleteOne({_id: req.params.id});
 

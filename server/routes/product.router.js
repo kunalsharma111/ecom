@@ -54,7 +54,8 @@ const imageUpload = multer({
     // req.body.productImage = req.file.buffer
     // console.log(req.file)
     const url = req.protocol + '://'+req.get("host")+'/';
-    req.body.productImage =  url + 'uploads/' + req.file.filename;
+    // https://rahulshettyacademy.com/api/ecom/
+    req.body.productImage =  'https://rahulshettyacademy.com/api/ecom/' + 'uploads/' + req.file.filename;
     if(req.user.userEmail != 'admin@gmail.com'){
       let productCount = await Product.find({productAddedBy:req.body.productAddedBy}).sort({"createdAt": -1});;
       if(productCount.length >=6){

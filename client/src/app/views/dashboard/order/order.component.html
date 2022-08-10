@@ -56,7 +56,11 @@
                   <i class="icon icon-user"></i>Personal Information
                 </div>
                 <form>
-                  <div class="form__cc">
+                  <div class="form__cc" style="background-color: #f6f9fc;
+                  padding: 22px;
+                  border-radius: 8px;
+                  border: 1px solid #dadada;
+                  margin-right: 10px;">
                     <div class="row">
                       <div class="field">
                         <div class="title">Credit Card Number
@@ -130,7 +134,7 @@
                         <input type="text" class="input txt" />
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top: -10px;">
                       <div class="field small">
                         <div class="title">Apply Coupon
                         </div>
@@ -142,20 +146,18 @@
                         <div class="title">&nbsp;
                           <span class="numberCircle"> </span>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-1" (click)="applyCoupon()">Apply Coupon</button>
-                        
+                        <button type="submit" class="btn btn-primary mt-1" (click)="applyCoupon()">Apply Coupon</button>  
                       </div>
                     </div>
-    
                   </div>
                 </form>
               </div>
               <div class="payment__shipping">
                 <div class="payment__title">
-                  <i class="icon icon-plane"></i> Shiping Information
+                  <i class="icon icon-plane"></i> Shipping Information
                 </div>
                 <div class="details__user">
-                  <div class="user__name">
+                  <div class="user__name mt-5">
                     <label style="color: lightgray; font-weight: 600;" type="text">{{email}}</label>
                     <input type="text" class="input txt text-validated" [(ngModel)]="email">
                     <div class="user__address">
@@ -174,7 +176,32 @@
                        </select> -->
                       </div>
                     </div>
-                      
+                    <!-- <div class="row">
+                      <div class="col-md-8 field">
+                        <div class="title">Apply Coupon
+                        </div>
+                        <input type="text" class="input txt" name="coupon" [(ngModel)]="coupon" />
+                        <p *ngIf="showCouponError" style="color: red;" class="mt-1">* Invalid Coupon</p>
+                        <p *ngIf="showCouponApplied" style="color: green;" class="mt-1">* Coupon Applied</p>
+                      </div>
+                      <div class="col-md-4 field">
+                        <div class="title">&nbsp;
+                          <span class="numberCircle"> </span>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-1" (click)="applyCoupon()">Apply Coupon</button>  
+                      </div>
+                    </div> -->
+                    <div class="actions">
+                      <a class="btnn action__submit" *ngIf="orders.orders.length > 1" (click)="confirmOrder()">Place Order
+                        <i class="icon icon-arrow-right-circle"></i>
+                      </a>
+              
+                      <a class="btnn action__submit" *ngIf="orders.orders.length == 1" (click)="confirmOrder()">Place Order
+                        <i class="icon icon-arrow-right-circle"></i>
+                      </a>
+                      <!-- <button routerLink="/dashboard" class="btn btn-primary mt-5">Go Back to Shop</button>&nbsp;
+                      <button routerLink="/dashboard/cart" class="btn btn-primary">Go Back to Cart</button> -->
+                    </div>
                     <!-- <br> {{date | date}} -->
                   </div>
                   
@@ -184,19 +211,9 @@
             </div>
           </div>
         </div>
-        <div class="container">
-          <div class="actions">
-            <a class="btnn action__submit" style="cursor: pointer;" *ngIf="orders.orders.length > 1" (click)="confirmOrder()">Place Order
-              <i class="icon icon-arrow-right-circle"></i>
-            </a>
-    
-            <a class="btnn action__submit" style="cursor: pointer;" *ngIf="orders.orders.length == 1" (click)="confirmOrder()">Place Order
-              <i class="icon icon-arrow-right-circle"></i>
-            </a>
-            <!-- <button routerLink="/dashboard" class="btn btn-primary mt-5">Go Back to Shop</button>&nbsp;
-            <button routerLink="/dashboard/cart" class="btn btn-primary">Go Back to Cart</button> -->
-          </div>
-          </div>
+        <!-- <div class="container">
+          
+          </div> -->
       </div>
     </div>
   </div>

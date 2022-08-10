@@ -79,7 +79,7 @@ img {
 }
 .details__user {
   background: #f6f9fc;
-  padding: 20px;
+  padding: 2px 20px;
   border-radius: 8px;
   border: 1px solid #dadada;
 }
@@ -236,16 +236,18 @@ input[type="text"] {
   font-family: "Josefin Sans", sans-serif;
   border-radius: 8px;
   border: 0;
+  margin-top: 75px;
   letter-spacing: 1px;
   color: #fff;
   background: red;
-  padding: 20px 60px;
+  padding: 10px 60px;
   white-space: nowrap;
   font-size: 16px;
   line-height: 1;
   text-transform: uppercase;
   transition: all 0.15s ease;
   text-decoration: none;
+  cursor: pointer;
 }
 .btnn .icon {
   margin-left: 10px;

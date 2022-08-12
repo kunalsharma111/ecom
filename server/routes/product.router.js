@@ -95,7 +95,7 @@ var result = product.productImage.split("/")[product.productImage.split("/").len
 fs.unlinkSync('./uploads/'+result);
 
     const url = req.protocol + '://'+req.get("host")+'/';
-    product.productImage =  url + 'uploads/' + req.file.filename;
+    product.productImage =  'https://rahulshettyacademy.com/api/ecom/' + 'uploads/' + req.file.filename;
     await product.save((err)=>{
       if(err){
           res.status(500).send({ message: err });

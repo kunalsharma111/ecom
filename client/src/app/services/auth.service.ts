@@ -25,7 +25,7 @@ export class AuthService {
   constructor(private http: HttpClient,
     private router: Router,private notificationService : NotificationService) {
       if(localStorage.getItem('token')){
-      this.currentUserSubject = new BehaviorSubject<User>(this.helper.decodeToken(localStorage.getItem('token') || '{}'));
+        this.currentUserSubject = new BehaviorSubject<User>(this.helper.decodeToken(localStorage.getItem('token')! || '{}')!);
         this.currentUser = this.currentUserSubject.asObservable();
       }else{
         this.currentUserSubject = new BehaviorSubject<User>(null!);

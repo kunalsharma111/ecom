@@ -70,7 +70,7 @@ export class ThanksorderComponent implements OnInit {
   }
   private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'});
-    fileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + '.xlsx');
+    fileSaver.saveAs(data, fileName + '.xlsx');
  }
   openCSV(){
     let orders = [];
